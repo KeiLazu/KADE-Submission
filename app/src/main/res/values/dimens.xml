@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  Created by Kei Lazu on 10/16/2018
+  check https://github.com/KeiLazu for more
+-->
+
+<resources>
+    <dimen name="padding_layout">16dp</dimen>
+    <dimen name="img_width">50dp</dimen>
+    <dimen name="img_height">50dp</dimen>
+    <dimen name="margin_textview">10dp</dimen>
+</resources>
