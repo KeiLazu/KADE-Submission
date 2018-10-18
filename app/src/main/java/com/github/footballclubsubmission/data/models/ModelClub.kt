@@ -1,7 +1,6 @@
-package com.github.footballclubsubmission
+package com.github.footballclubsubmission.data.models
 
 import android.os.Parcelable
-import android.support.annotation.DrawableRes
 import kotlinx.android.parcel.Parcelize
 
 /**

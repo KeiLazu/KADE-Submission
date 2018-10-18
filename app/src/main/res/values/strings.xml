@@ -2,6 +2,8 @@
     <string name="app_name">FootballClubSubmission</string>
     <string name="desc_club_image">club image</string>
     <string name="text_temp">(TEMP)</string>
+    <string name="club_name_null">None</string>
+    <string name="club_desc_null">No Detail</string>
 
     <string-array name="club_name">
         <item>Barcelona FC</item>
