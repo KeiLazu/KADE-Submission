@@ -15,13 +15,9 @@ abstract class BaseActivity : AppCompatActivity(), MvpView, BaseFragment.Callbac
         performDI()
     }
 
-    override fun showProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun showProgress() {}
 
-    override fun hideProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun hideProgress() {}
 
     private fun performDI() = AndroidInjection.inject(this)
 }
