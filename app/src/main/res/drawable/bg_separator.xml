@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Created by Kei Lazu (Kennix Lazuardi)
+  check https://github.com/KeiLazu for more
+-->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient android:startColor="@android:color/transparent"
+                    android:endColor="@android:color/darker_gray"
+                      android:angle="90"
+            />
+        </shape>
+    </item>
+</layer-list>

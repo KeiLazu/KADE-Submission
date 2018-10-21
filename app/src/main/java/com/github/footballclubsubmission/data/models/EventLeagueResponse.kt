@@ -2,8 +2,8 @@ package com.github.footballclubsubmission.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class TeamResponse(
+data class EventLeagueResponse(
 
-	@field:SerializedName("teams")
-	var teams: MutableList<TeamsItem>
+	@field:SerializedName("events")
+	var events: MutableList<EventsItem>
 )

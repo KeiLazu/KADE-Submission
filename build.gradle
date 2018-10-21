@@ -2,10 +2,6 @@
 
 buildscript {
     ext.kotlin_version = '1.2.71'
-    ext.anko_version = '0.10.5'
-    ext.support_version = "28.0.0"
-    ext.gson_version = '2.8.5'
-    ext.picasso_version = '2.71828'
 
     repositories {
         google()
@@ -29,4 +25,22 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    // App dependencies
+    supportLibraryVersion = '27.1.1'
+    gsonVersion = '2.8.0'
+    glideVersion = '3.7.0'
+    rx2FastAndroidNetworking = '1.0.1'
+    dagger2Version = '2.16'
+    rxjava2Version = '2.0.6'
+    rxandroidVersion = '2.0.2'
+    ankoVersion = "0.10.7"
+
+    //Test dependencies
+    junitVersion = '4.12'
+    espressoVersion = '2.2.2'
+    mockitoVersion = '2.7.1'
+    androidKTXVersion = '1.0.0'
 }

@@ -13,4 +13,21 @@
         <item>French Ligue 1</item>
         <item>Spanish La Liga</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_last_match">LAST MATCH</string>
+    <string name="title_next_match">NEXT MATCH</string>
+    <string name="text_versus">vs</string>
+    <string name="base_score">0</string>
+    <string name="text_shots">Shots</string>
+    <string name="text_goals">Goals</string>
+    <string name="text_lineups">Lineups</string>
+    <string name="text_goalkeeper">Goal Keepers</string>
+    <string name="text_defense">Defense</string>
+    <string name="text_midfield">Midfield</string>
+    <string name="text_forward">Forward</string>
+    <string name="text_substitutes">Substitutes</string>
+    <string name="text_title_match_detail">Match Detail</string>
+    <string name="text_format_date">%1$s, %2$s</string>
 </resources>

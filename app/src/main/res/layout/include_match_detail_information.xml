@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Created by Kei Lazu (Kennix Lazuardi)
+  check https://github.com/KeiLazu for more
+-->
+
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+            android:id="@+id/include_match_detail_info_goals_layout"
+            android:layout_width="@dimen/zero"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="@dimen/generic_margin_top"
+    >
+
+        <TextView
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:id="@+id/include_match_detail_info_home_scorer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/include_match_detail_info_goals_separator"
+                style="@style/TextAppearanceInfo.Home"
+        />
+
+        <TextView
+                android:id="@+id/include_match_detail_info_goals_separator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_goals"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/TextAppearanceInfo"
+        />
+
+        <TextView
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:id="@+id/include_match_detail_info_away_scorer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/include_match_detail_info_goals_separator"
+                android:text=""
+                style="@style/TextAppearanceInfo.Away"
+        />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_height"
+            android:background="@drawable/bg_separator"
+            app:layout_constraintTop_toBottomOf="@id/include_match_detail_info_goals_layout"
+    />
+
+    <android.support.constraint.ConstraintLayout
+            android:id="@+id/include_match_detail_info_shots_layout"
+            android:layout_width="@dimen/zero"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/include_match_detail_info_goals_layout"
+            android:padding="@dimen/generic_margin_top"
+    >
+
+        <TextView
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:id="@+id/include_match_detail_info_home_total_shot"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/include_match_detail_info_shots_separator"
+                style="@style/TextAppearanceInfo.Home"
+        />
+
+        <TextView
+                android:id="@+id/include_match_detail_info_shots_separator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_shots"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/TextAppearanceInfo"
+        />
+
+        <TextView
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:id="@+id/include_match_detail_info_away_total_shots"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/include_match_detail_info_shots_separator"
+                android:text=""
+                style="@style/TextAppearanceInfo.Away"
+        />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_height"
+            android:background="@drawable/bg_separator"
+            app:layout_constraintTop_toBottomOf="@id/include_match_detail_info_shots_layout"
+    />
+
+    <android.support.constraint.ConstraintLayout
+            android:id="@+id/include_match_detail_info_lineups_layout"
+            android:layout_width="@dimen/zero"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/include_match_detail_info_shots_layout"
+            android:padding="@dimen/generic_margin_top"
+            android:layout_marginTop="@dimen/margin_team_name"
+    >
+
+        <TextView
+                android:id="@+id/include_match_detail_info_lineups_separator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_lineups"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+        />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_height"
+            android:background="@drawable/bg_separator"
+            app:layout_constraintTop_toBottomOf="@id/include_match_detail_info_lineups_layout"
+    />
+
+    <android.support.constraint.ConstraintLayout
+            android:id="@+id/include_match_detail_info_goalkeepers_layout"
+            android:layout_width="@dimen/zero"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/include_match_detail_info_lineups_layout"
+            android:padding="@dimen/generic_margin_top"
+    >
+
+        <TextView
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:id="@+id/include_match_detail_info_home_goalkeepers"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/include_match_detail_info_goalkeepers_separator"
+                style="@style/TextAppearanceInfo.Home"
+        />
+
+        <TextView
+                android:id="@+id/include_match_detail_info_goalkeepers_separator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_goalkeeper"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/TextAppearanceInfo"
+        />
+
+        <TextView
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:id="@+id/include_match_detail_info_away_goalkeepers"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/include_match_detail_info_goalkeepers_separator"
+                android:text=""
+                style="@style/TextAppearanceInfo.Away"
+        />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_height"
+            android:background="@drawable/bg_separator"
+            app:layout_constraintTop_toBottomOf="@id/include_match_detail_info_goalkeepers_layout"
+    />
+
+    <android.support.constraint.ConstraintLayout
+            android:id="@+id/include_match_detail_info_defense_layout"
+            android:layout_width="@dimen/zero"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/include_match_detail_info_goalkeepers_layout"
+            android:padding="@dimen/generic_margin_top"
+    >
+
+        <TextView
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:id="@+id/include_match_detail_info_home_defense"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/include_match_detail_info_defense_separator"
+                style="@style/TextAppearanceInfo.Home"
+        />
+
+        <TextView
+                android:id="@+id/include_match_detail_info_defense_separator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_defense"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/TextAppearanceInfo"
+        />
+
+        <TextView
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:id="@+id/include_match_detail_info_away_defense"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/include_match_detail_info_defense_separator"
+                android:text=""
+                style="@style/TextAppearanceInfo.Away"
+        />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_height"
+            android:background="@drawable/bg_separator"
+            app:layout_constraintTop_toBottomOf="@id/include_match_detail_info_defense_layout"
+    />
+
+    <android.support.constraint.ConstraintLayout
+            android:id="@+id/include_match_detail_info_midfield_layout"
+            android:layout_width="@dimen/zero"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/include_match_detail_info_defense_layout"
+            android:padding="@dimen/generic_margin_top"
+    >
+
+        <TextView
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:id="@+id/include_match_detail_info_home_midfield"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/include_match_detail_info_midfield_separator"
+                style="@style/TextAppearanceInfo.Home"
+        />
+
+        <TextView
+                android:id="@+id/include_match_detail_info_midfield_separator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_midfield"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/TextAppearanceInfo"
+        />
+
+        <TextView
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:id="@+id/include_match_detail_info_away_midfield"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/include_match_detail_info_midfield_separator"
+                android:text=""
+                style="@style/TextAppearanceInfo.Away"
+        />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_height"
+            android:background="@drawable/bg_separator"
+            app:layout_constraintTop_toBottomOf="@id/include_match_detail_info_midfield_layout"
+    />
+
+    <android.support.constraint.ConstraintLayout
+            android:id="@+id/include_match_detail_info_forward_layout"
+            android:layout_width="@dimen/zero"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/include_match_detail_info_midfield_layout"
+            android:padding="@dimen/generic_margin_top"
+    >
+
+        <TextView
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:id="@+id/include_match_detail_info_home_forward"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/include_match_detail_info_forward_separator"
+                style="@style/TextAppearanceInfo.Home"
+        />
+
+        <TextView
+                android:id="@+id/include_match_detail_info_forward_separator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_forward"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/TextAppearanceInfo"
+        />
+
+        <TextView
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:id="@+id/include_match_detail_info_away_forward"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/include_match_detail_info_forward_separator"
+                android:text=""
+                style="@style/TextAppearanceInfo.Away"
+        />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_height"
+            android:background="@drawable/bg_separator"
+            app:layout_constraintTop_toBottomOf="@id/include_match_detail_info_forward_layout"
+    />
+
+    <android.support.constraint.ConstraintLayout
+            android:id="@+id/include_match_detail_info_subs_layout"
+            android:layout_width="@dimen/zero"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/include_match_detail_info_forward_layout"
+            android:padding="@dimen/generic_margin_top"
+    >
+
+        <TextView
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:id="@+id/include_match_detail_info_home_subs"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/include_match_detail_info_subs_separator"
+                style="@style/TextAppearanceInfo.Home"
+        />
+
+        <TextView
+                android:id="@+id/include_match_detail_info_subs_separator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_substitutes"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/TextAppearanceInfo"
+        />
+
+        <TextView
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:id="@+id/include_match_detail_info_away_subs"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/include_match_detail_info_subs_separator"
+                android:text=""
+                style="@style/TextAppearanceInfo.Away"
+        />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_height"
+            android:background="@drawable/bg_separator"
+            app:layout_constraintTop_toBottomOf="@id/include_match_detail_info_subs_layout"
+    />
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Created by Kei Lazu (Kennix Lazuardi)
+  check https://github.com/KeiLazu for more
+-->
+
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:paddingTop="@dimen/generic_margin_top"
+        android:paddingBottom="@dimen/generic_margin_bottom"
+>
+
+    <TextView
+            android:id="@+id/include_match_detail_score_date_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/TextAppearanceInfo"
+            android:textSize="@dimen/text_size_date"
+            app:layout_constraintTop_toTopOf="parent"
+    />
+
+    <ImageView
+            android:id="@+id/include_match_detail_score_img_home_club"
+            android:layout_width="@dimen/img_width"
+            android:layout_height="@dimen/img_height"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="@id/include_match_detail_score_tv_home_name"
+            app:layout_constraintEnd_toEndOf="@id/include_match_detail_score_tv_home_name"
+            app:layout_constraintBottom_toTopOf="@id/include_match_detail_score_tv_home_name"
+            android:contentDescription="@string/desc_club_image"
+            app:layout_constraintVertical_chainStyle="packed"/>
+
+    <TextView
+            android:id="@+id/include_match_detail_score_tv_home_name"
+            android:layout_width="@dimen/text_width_club_name"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/include_match_detail_score_img_home_club"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/include_match_detail_score_tv_versus"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
+            android:text="asdfasdfasdfasdfasdfasdfasdfasdfsafdaasdf"
+            style="@style/TextAppearanceList"
+    />
+
+    <ImageView
+            android:id="@+id/include_match_detail_score_img_away_club"
+            android:layout_width="@dimen/img_width"
+            android:layout_height="@dimen/img_height"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/include_match_detail_score_tv_away_name"
+            app:layout_constraintStart_toStartOf="@id/include_match_detail_score_tv_away_name"
+            app:layout_constraintBottom_toTopOf="@id/include_match_detail_score_tv_away_name"
+            android:contentDescription="@string/desc_club_image"
+            app:layout_constraintVertical_chainStyle="packed"
+    />
+
+    <TextView
+            android:id="@+id/include_match_detail_score_tv_away_name"
+            android:layout_width="@dimen/text_width_club_name"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/include_match_detail_score_img_away_club"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/include_match_detail_score_tv_versus"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.8"
+            android:text="asdfasdfasdfasdfasdfasdfa"
+            android:textColor="@color/colorPrimary"
+            style="@style/TextAppearanceList"
+    />
+
+    <TextView
+            android:id="@+id/include_match_detail_score_tv_versus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_versus"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.7"
+    />
+
+    <TextView
+            android:id="@+id/include_match_detail_score_home_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearanceInfo"
+            android:textSize="@dimen/text_size_score"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@id/include_match_detail_score_tv_versus"
+            app:layout_constraintBottom_toBottomOf="@id/include_match_detail_score_tv_versus"
+            app:layout_constraintEnd_toStartOf="@id/include_match_detail_score_tv_versus"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.9"
+            android:text="0"
+    />
+
+    <TextView
+            android:id="@+id/include_match_detail_score_away_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearanceInfo"
+            android:textSize="@dimen/text_size_score"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@id/include_match_detail_score_tv_versus"
+            app:layout_constraintBottom_toBottomOf="@id/include_match_detail_score_tv_versus"
+            app:layout_constraintStart_toEndOf="@id/include_match_detail_score_tv_versus"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.1"
+            android:text="0"
+    />
+
+</android.support.constraint.ConstraintLayout>
