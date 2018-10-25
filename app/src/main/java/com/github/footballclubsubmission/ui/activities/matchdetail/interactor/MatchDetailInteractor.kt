@@ -1,4 +1,4 @@
-package com.github.footballclubsubmission.ui.activities.matchDetail.interactor
+package com.github.footballclubsubmission.ui.activities.matchdetail.interactor
 
 import com.github.footballclubsubmission.data.models.TeamResponse
 import com.github.footballclubsubmission.data.network.ApiHelper

@@ -1,14 +1,14 @@
-package com.github.footballclubsubmission.ui.fragments.matchList
+package com.github.footballclubsubmission.ui.fragments.matchlist
 
 import android.support.v7.widget.LinearLayoutManager
 import com.github.footballclubsubmission.data.models.EventLeagueResponse
 import com.github.footballclubsubmission.ui.adapters.MatchListAdapter
-import com.github.footballclubsubmission.ui.fragments.matchList.interactor.MatchListInteractor
-import com.github.footballclubsubmission.ui.fragments.matchList.interactor.MatchListMvpInteractor
-import com.github.footballclubsubmission.ui.fragments.matchList.presenter.MatchListMvpPresenter
-import com.github.footballclubsubmission.ui.fragments.matchList.presenter.MatchListPresenter
-import com.github.footballclubsubmission.ui.fragments.matchList.view.MatchListFragment
-import com.github.footballclubsubmission.ui.fragments.matchList.view.MatchListMvpView
+import com.github.footballclubsubmission.ui.fragments.matchlist.interactor.MatchListInteractor
+import com.github.footballclubsubmission.ui.fragments.matchlist.interactor.MatchListMvpInteractor
+import com.github.footballclubsubmission.ui.fragments.matchlist.presenter.MatchListMvpPresenter
+import com.github.footballclubsubmission.ui.fragments.matchlist.presenter.MatchListPresenter
+import com.github.footballclubsubmission.ui.fragments.matchlist.view.MatchListFragment
+import com.github.footballclubsubmission.ui.fragments.matchlist.view.MatchListMvpView
 import dagger.Module
 import dagger.Provides
 

@@ -1,7 +1,7 @@
-package com.github.footballclubsubmission.ui.fragments.matchList.view
+package com.github.footballclubsubmission.ui.fragments.matchlist.view
 
 
-import android.content.Intent
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
@@ -11,15 +11,16 @@ import android.view.View
 import android.view.ViewGroup
 import com.github.footballclubsubmission.R
 import com.github.footballclubsubmission.data.models.EventLeagueResponse
-import com.github.footballclubsubmission.ui.activities.matchDetail.view.MatchDetailActivity
+import com.github.footballclubsubmission.ui.activities.matchdetail.view.MatchDetailActivity
 import com.github.footballclubsubmission.ui.adapters.MatchListAdapter
 import com.github.footballclubsubmission.ui.base.view.BaseFragment
-import com.github.footballclubsubmission.ui.fragments.matchList.interactor.MatchListMvpInteractor
-import com.github.footballclubsubmission.ui.fragments.matchList.presenter.MatchListMvpPresenter
-import kotlinx.android.synthetic.main.fragment_match_list.*
-import javax.inject.Inject
-import com.github.footballclubsubmission.utils.visible
+import com.github.footballclubsubmission.ui.fragments.matchlist.interactor.MatchListMvpInteractor
+import com.github.footballclubsubmission.ui.fragments.matchlist.presenter.MatchListMvpPresenter
 import com.github.footballclubsubmission.utils.invisible
+import com.github.footballclubsubmission.utils.visible
+import kotlinx.android.synthetic.main.fragment_match_list.*
+import org.jetbrains.anko.startActivity
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
@@ -45,6 +46,14 @@ class MatchListFragment : BaseFragment(), MatchListMvpView, MatchListAdapter.Ope
             bundle.putInt(BUNDLE_KEY_DISPLAY_MODE, displayMode)
             fragment.arguments = bundle
             return fragment
+        }
+
+        fun getSimpleName(context: Context, displayMode: Int): String {
+            return when (displayMode) {
+                DISPLAY_MODE_LAST_MATCH -> context.getString(R.string.last_match_simple_name)
+                DISPLAY_MODE_NEXT_MATCH -> context.getString(R.string.next_match_simple_name)
+                else -> MatchListFragment::class.java.simpleName
+            }
         }
     }
 
@@ -83,9 +92,7 @@ class MatchListFragment : BaseFragment(), MatchListMvpView, MatchListAdapter.Ope
     }
 
     override fun openMatchDetailActivity(eventId: Int) {
-        val bundle = Bundle()
-        bundle.putInt(MatchDetailActivity.BUNDLE_KEY_EVENT_ID, eventId)
-        startActivity(Intent(getBaseActivity(), MatchDetailActivity::class.java).putExtras(bundle))
+        getBaseActivity()?.applicationContext?.startActivity<MatchDetailActivity>(MatchDetailActivity.BUNDLE_KEY_EVENT_ID to eventId)
     }
 
     override fun putDataMatchList(eventLeagueResponse: EventLeagueResponse) {
@@ -93,11 +100,6 @@ class MatchListFragment : BaseFragment(), MatchListMvpView, MatchListAdapter.Ope
         match_list_srl.isRefreshing = false
     }
 
-    override fun showProgress() {
-        match_list_progress_bar.visible()
-    }
-
-    override fun hideProgress() {
-        match_list_progress_bar.invisible()
-    }
+    override fun showProgress() = match_list_progress_bar.visible()
+    override fun hideProgress() = match_list_progress_bar.invisible()
 }

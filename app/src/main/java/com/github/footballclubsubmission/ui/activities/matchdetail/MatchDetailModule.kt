@@ -1,10 +1,10 @@
-package com.github.footballclubsubmission.ui.activities.matchDetail
+package com.github.footballclubsubmission.ui.activities.matchdetail
 
-import com.github.footballclubsubmission.ui.activities.matchDetail.interactor.MatchDetailInteractor
-import com.github.footballclubsubmission.ui.activities.matchDetail.interactor.MatchDetailMvpInteractor
-import com.github.footballclubsubmission.ui.activities.matchDetail.presenter.MatchDetailMvpPresenter
-import com.github.footballclubsubmission.ui.activities.matchDetail.presenter.MatchDetailPresenter
-import com.github.footballclubsubmission.ui.activities.matchDetail.view.MatchDetailMvpView
+import com.github.footballclubsubmission.ui.activities.matchdetail.interactor.MatchDetailInteractor
+import com.github.footballclubsubmission.ui.activities.matchdetail.interactor.MatchDetailMvpInteractor
+import com.github.footballclubsubmission.ui.activities.matchdetail.presenter.MatchDetailMvpPresenter
+import com.github.footballclubsubmission.ui.activities.matchdetail.presenter.MatchDetailPresenter
+import com.github.footballclubsubmission.ui.activities.matchdetail.view.MatchDetailMvpView
 import dagger.Module
 import dagger.Provides
 

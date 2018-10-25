@@ -28,8 +28,11 @@
     <string name="text_forward">Forward</string>
     <string name="text_substitutes">Substitutes</string>
     <string name="text_title_match_detail">Match Detail</string>
-    <string name="text_format_date">%1$s, %2$s</string>
     <string name="prev_match_bnm">Prev match</string>
     <string name="next_match_bnm">Next match</string>
     <string name="favorites_bnm">Favorites</string>
+    <string name="last_match_simple_name">Last Match</string>
+    <string name="next_match_simple_name">Next Match</string>
+    <string name="text_example">Example</string>
+    <string name="text_zero">0</string>
 </resources>

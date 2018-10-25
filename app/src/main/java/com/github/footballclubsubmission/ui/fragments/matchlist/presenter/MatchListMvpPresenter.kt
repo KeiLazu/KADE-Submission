@@ -1,8 +1,8 @@
-package com.github.footballclubsubmission.ui.fragments.matchList.presenter
+package com.github.footballclubsubmission.ui.fragments.matchlist.presenter
 
 import com.github.footballclubsubmission.ui.base.presenter.MvpPresenter
-import com.github.footballclubsubmission.ui.fragments.matchList.interactor.MatchListMvpInteractor
-import com.github.footballclubsubmission.ui.fragments.matchList.view.MatchListMvpView
+import com.github.footballclubsubmission.ui.fragments.matchlist.interactor.MatchListMvpInteractor
+import com.github.footballclubsubmission.ui.fragments.matchlist.view.MatchListMvpView
 
 /**
  *  Created by Kei Lazu (Kennix Lazuardi) on 10/20/2018

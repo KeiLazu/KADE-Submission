@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import com.github.footballclubsubmission.R
 import com.github.footballclubsubmission.data.models.EventLeagueResponse
 import com.github.footballclubsubmission.data.models.EventsItem
-import com.github.footballclubsubmission.ui.activities.matchDetail.view.MatchDetailActivity
+import com.github.footballclubsubmission.ui.activities.matchdetail.view.MatchDetailActivity
 import com.github.footballclubsubmission.utils.dateConverterDate
-import com.github.footballclubsubmission.utils.dateConverterToDayShort
 import kotlinx.android.synthetic.main.list_item_match_list.view.*
 
 /**
@@ -83,11 +82,8 @@ class MatchListAdapter(private val response: EventLeagueResponse) :
             scoreAway: String?
         ) {
             datetime?.let {
-                itemView.list_item_match_list_date_time.text = itemView.resources.getString(
-                    R.string.text_format_date,
-                    dateConverterToDayShort(datetime, MatchDetailActivity.DATE_PATTERN),
-                    dateConverterDate(datetime, MatchDetailActivity.DATE_PATTERN)
-                )
+                itemView.list_item_match_list_date_time.text =
+                        dateConverterDate(datetime, MatchDetailActivity.DATE_PATTERN)
             }
             nameHomeClub?.let { itemView.list_item_match_list_home_name_club.text = it }
             nameAwayClub?.let { itemView.list_item_match_list_away_name_club.text = it }

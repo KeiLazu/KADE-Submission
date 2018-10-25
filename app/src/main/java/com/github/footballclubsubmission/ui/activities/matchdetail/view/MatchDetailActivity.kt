@@ -1,4 +1,4 @@
-package com.github.footballclubsubmission.ui.activities.matchDetail.view
+package com.github.footballclubsubmission.ui.activities.matchdetail.view
 
 import android.os.Bundle
 import android.view.View
@@ -6,11 +6,10 @@ import com.bumptech.glide.Glide
 import com.github.footballclubsubmission.R
 import com.github.footballclubsubmission.data.models.EventsItem
 import com.github.footballclubsubmission.data.models.TeamsItem
-import com.github.footballclubsubmission.ui.activities.matchDetail.interactor.MatchDetailMvpInteractor
-import com.github.footballclubsubmission.ui.activities.matchDetail.presenter.MatchDetailMvpPresenter
+import com.github.footballclubsubmission.ui.activities.matchdetail.interactor.MatchDetailMvpInteractor
+import com.github.footballclubsubmission.ui.activities.matchdetail.presenter.MatchDetailMvpPresenter
 import com.github.footballclubsubmission.ui.base.view.BaseActivity
 import com.github.footballclubsubmission.utils.dateConverterDate
-import com.github.footballclubsubmission.utils.dateConverterToDayShort
 import com.github.footballclubsubmission.utils.invisible
 import com.github.footballclubsubmission.utils.visible
 import kotlinx.android.synthetic.main.activity_match_detail.*
@@ -85,11 +84,8 @@ class MatchDetailActivity : BaseActivity(), MatchDetailMvpView {
     }
 
     private fun putDateTimeInfo(eventsItem: EventsItem) {
-        include_match_detail_score_date_time.text = getString(
-            R.string.text_format_date,
-            dateConverterToDayShort(eventsItem.dateEvent ?: "", DATE_PATTERN),
-            dateConverterDate(eventsItem.dateEvent ?: "", DATE_PATTERN)
-        )
+        include_match_detail_score_date_time.text =
+                dateConverterDate(eventsItem.dateEvent ?: "", DATE_PATTERN)
     }
 
     private fun putGoalsInfo(eventsItem: EventsItem) {

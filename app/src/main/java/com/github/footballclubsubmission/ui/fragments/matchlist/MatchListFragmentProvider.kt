@@ -1,6 +1,6 @@
-package com.github.footballclubsubmission.ui.fragments.matchList
+package com.github.footballclubsubmission.ui.fragments.matchlist
 
-import com.github.footballclubsubmission.ui.fragments.matchList.view.MatchListFragment
+import com.github.footballclubsubmission.ui.fragments.matchlist.view.MatchListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

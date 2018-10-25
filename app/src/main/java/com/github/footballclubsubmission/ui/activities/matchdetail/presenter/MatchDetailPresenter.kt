@@ -1,7 +1,7 @@
-package com.github.footballclubsubmission.ui.activities.matchDetail.presenter
+package com.github.footballclubsubmission.ui.activities.matchdetail.presenter
 
-import com.github.footballclubsubmission.ui.activities.matchDetail.interactor.MatchDetailMvpInteractor
-import com.github.footballclubsubmission.ui.activities.matchDetail.view.MatchDetailMvpView
+import com.github.footballclubsubmission.ui.activities.matchdetail.interactor.MatchDetailMvpInteractor
+import com.github.footballclubsubmission.ui.activities.matchdetail.view.MatchDetailMvpView
 import com.github.footballclubsubmission.ui.base.presenter.BasePresenter
 import com.github.footballclubsubmission.utils.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable

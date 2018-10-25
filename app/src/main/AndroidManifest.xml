@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.matchDetail.view.MatchDetailActivity"
+        <activity android:name=".ui.activities.matchdetail.view.MatchDetailActivity"
                 android:theme="@style/AppTheme.FullScreen"
         />
     </application>

@@ -1,9 +1,9 @@
 package com.github.footballclubsubmission.di.builder
 
 import com.github.footballclubsubmission.ui.activities.main.view.MainActivity
-import com.github.footballclubsubmission.ui.activities.matchDetail.MatchDetailModule
-import com.github.footballclubsubmission.ui.activities.matchDetail.view.MatchDetailActivity
-import com.github.footballclubsubmission.ui.fragments.matchList.MatchListFragmentProvider
+import com.github.footballclubsubmission.ui.activities.matchdetail.MatchDetailModule
+import com.github.footballclubsubmission.ui.activities.matchdetail.view.MatchDetailActivity
+import com.github.footballclubsubmission.ui.fragments.matchlist.MatchListFragmentProvider
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

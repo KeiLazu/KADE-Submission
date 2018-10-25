@@ -1,4 +1,4 @@
-package com.github.footballclubsubmission.ui.fragments.matchList.interactor
+package com.github.footballclubsubmission.ui.fragments.matchlist.interactor
 
 import com.github.footballclubsubmission.data.network.ApiHelper
 import com.github.footballclubsubmission.ui.base.interactor.BaseInteractor

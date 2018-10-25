@@ -1,4 +1,4 @@
-package com.github.footballclubsubmission.ui.activities.matchDetail.view
+package com.github.footballclubsubmission.ui.activities.matchdetail.view
 
 import com.github.footballclubsubmission.data.models.EventsItem
 import com.github.footballclubsubmission.data.models.TeamsItem

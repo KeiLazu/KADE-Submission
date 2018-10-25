@@ -43,7 +43,7 @@
             app:layout_constraintEnd_toStartOf="@id/include_match_detail_score_tv_versus"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.2"
-            android:text="asdfasdfasdfasdfasdfasdfasdfasdfsafdaasdf"
+            android:text="@string/text_example"
             style="@style/TextAppearanceList"
     />
 
@@ -68,7 +68,7 @@
             app:layout_constraintStart_toEndOf="@id/include_match_detail_score_tv_versus"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.8"
-            android:text="asdfasdfasdfasdfasdfasdfa"
+            android:text="@string/text_example"
             android:textColor="@color/colorPrimary"
             style="@style/TextAppearanceList"
     />
@@ -98,7 +98,7 @@
             app:layout_constraintEnd_toStartOf="@id/include_match_detail_score_tv_versus"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.9"
-            android:text="0"
+            android:text="@string/text_zero"
     />
 
     <TextView
@@ -113,7 +113,7 @@
             app:layout_constraintStart_toEndOf="@id/include_match_detail_score_tv_versus"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.1"
-            android:text="0"
+            android:text="@string/text_zero"
     />
 
 </android.support.constraint.ConstraintLayout>
