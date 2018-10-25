@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Created by Kei Lazu (Kennix Lazuardi)
+  check https://github.com/KeiLazu for more
+-->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/prev_match"
+          android:enabled="true"
+          android:title="@string/prev_match_bnm"
+          android:icon="@drawable/ic_prev_match_black_24dp"
+          app:showAsAction="ifRoom" />
+    <item android:id="@+id/next_match"
+          android:enabled="true"
+          android:title="@string/next_match_bnm"
+          android:icon="@drawable/ic_next_match_black_24dp"
+          app:showAsAction="ifRoom" />
+    <item android:id="@+id/favorites"
+          android:enabled="true"
+          android:title="@string/favorites_bnm"
+          android:icon="@drawable/ic_favorite_black_24dp"
+          app:showAsAction="ifRoom" />
+</menu>

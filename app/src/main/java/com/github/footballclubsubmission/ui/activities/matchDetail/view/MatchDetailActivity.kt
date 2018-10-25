@@ -1,8 +1,6 @@
 package com.github.footballclubsubmission.ui.activities.matchDetail.view
 
-import android.graphics.ColorFilter
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.view.View
 import com.bumptech.glide.Glide
 import com.github.footballclubsubmission.R
@@ -18,7 +16,6 @@ import com.github.footballclubsubmission.utils.visible
 import kotlinx.android.synthetic.main.activity_match_detail.*
 import kotlinx.android.synthetic.main.include_match_detail_information.*
 import kotlinx.android.synthetic.main.include_match_detail_score.*
-import kotlinx.android.synthetic.main.notification_template_lines_media.view.*
 import javax.inject.Inject
 
 class MatchDetailActivity : BaseActivity(), MatchDetailMvpView {
@@ -88,17 +85,22 @@ class MatchDetailActivity : BaseActivity(), MatchDetailMvpView {
     }
 
     private fun putDateTimeInfo(eventsItem: EventsItem) {
-        include_match_detail_score_date_time.text = getString(R.string.text_format_date,
+        include_match_detail_score_date_time.text = getString(
+            R.string.text_format_date,
             dateConverterToDayShort(eventsItem.dateEvent ?: "", DATE_PATTERN),
-            dateConverterDate(eventsItem.dateEvent ?: "", DATE_PATTERN))
+            dateConverterDate(eventsItem.dateEvent ?: "", DATE_PATTERN)
+        )
     }
 
     private fun putGoalsInfo(eventsItem: EventsItem) {
-        include_match_detail_info_home_scorer.text = eventsItem.strHomeGoalDetails; include_match_detail_info_away_scorer.text = eventsItem.strAwayGoalDetails
+        include_match_detail_info_home_scorer.text =
+                eventsItem.strHomeGoalDetails; include_match_detail_info_away_scorer.text =
+                eventsItem.strAwayGoalDetails
     }
 
     private fun putShotsInfo(eventsItem: EventsItem) {
-        include_match_detail_info_home_total_shot.text = eventsItem.intHomeShots; include_match_detail_info_away_total_shots.text = eventsItem.intAwayShots
+        include_match_detail_info_home_total_shot.text =
+                eventsItem.intHomeShots; include_match_detail_info_away_total_shots.text = eventsItem.intAwayShots
     }
 
     private fun putHomeLineupsInfo(eventsItem: EventsItem) {
@@ -126,7 +128,9 @@ class MatchDetailActivity : BaseActivity(), MatchDetailMvpView {
     }
 
     override fun displayHomeBadge(teamsItem: TeamsItem, isHomeBadge: Boolean) {
-        if (isHomeBadge) Glide.with(this).load(teamsItem.strTeamBadge).fitCenter().into(include_match_detail_score_img_home_club)
+        if (isHomeBadge) Glide.with(this).load(teamsItem.strTeamBadge).fitCenter().into(
+            include_match_detail_score_img_home_club
+        )
         else Glide.with(this).load(teamsItem.strTeamBadge).fitCenter().into(include_match_detail_score_img_away_club)
     }
 

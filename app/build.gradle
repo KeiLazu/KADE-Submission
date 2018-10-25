@@ -72,25 +72,13 @@ dependencies {
     androidTestImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
     kaptAndroidTest "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
 
-//    // Anko
-//    implementation "org.jetbrains.anko:anko:$rootProject.ankoVersion"
-//
-//    // CardView-v7
-//    implementation "org.jetbrains.anko:anko-cardview-v7:$rootProject.ankoVersion"
-//
-//    // Design
-//    implementation "org.jetbrains.anko:anko-design:$rootProject.ankoVersion"
-//    implementation "org.jetbrains.anko:anko-design-coroutines:$rootProject.ankoVersion"
-//
-//    // RecyclerView-v7
-//    implementation "org.jetbrains.anko:anko-recyclerview-v7:$rootProject.ankoVersion"
-//    implementation "org.jetbrains.anko:anko-recyclerview-v7-coroutines:$rootProject.ankoVersion"
-
     // Sherlock
     debugImplementation('com.github.ajitsing:sherlock:1.0.4@aar') {
         transitive = true
     }
     releaseImplementation('com.github.ajitsing:sherlock-no-op:1.0.4@aar')
+
+    implementation "org.jetbrains.anko:anko-sqlite:$ankoVersion"
 
 }
 

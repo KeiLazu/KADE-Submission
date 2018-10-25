@@ -5,17 +5,18 @@ import com.github.footballclubsubmission.ui.activities.matchDetail.view.MatchDet
 import com.github.footballclubsubmission.ui.base.presenter.BasePresenter
 import com.github.footballclubsubmission.utils.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
 /**
  *  Created by Kei Lazu (Kennix Lazuardi) on 10/21/2018
  *  check https://github.com/KeiLazu for more
  */
-class MatchDetailPresenter<V: MatchDetailMvpView, I: MatchDetailMvpInteractor>
-        @Inject internal constructor(interactor: I, schedulerProvider: SchedulerProvider, compositeDisposable: CompositeDisposable)
-    : BasePresenter<V, I>(interactor, schedulerProvider, compositeDisposable), MatchDetailMvpPresenter<V,I>  {
+class MatchDetailPresenter<V : MatchDetailMvpView, I : MatchDetailMvpInteractor>
+@Inject internal constructor(
+    interactor: I,
+    schedulerProvider: SchedulerProvider,
+    compositeDisposable: CompositeDisposable
+) : BasePresenter<V, I>(interactor, schedulerProvider, compositeDisposable), MatchDetailMvpPresenter<V, I> {
 
     override fun onViewCreated(eventId: Int) {
         getEventDetail(eventId)
@@ -39,7 +40,7 @@ class MatchDetailPresenter<V: MatchDetailMvpView, I: MatchDetailMvpInteractor>
         interactor?.let { it ->
             it.getTeamBadgeApi(teamId)
                 .compose(schedulerProvider.ioToMainObservableScheduler())
-                .subscribe{ response ->
+                .subscribe { response ->
                     getView()?.let {
                         if (isHomeBadge) it.displayHomeBadge(response.teams[0], true)
                         else it.displayHomeBadge(response.teams[0], false)

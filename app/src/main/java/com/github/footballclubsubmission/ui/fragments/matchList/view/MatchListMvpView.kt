@@ -1,7 +1,6 @@
 package com.github.footballclubsubmission.ui.fragments.matchList.view
 
 import com.github.footballclubsubmission.data.models.EventLeagueResponse
-import com.github.footballclubsubmission.data.models.EventsItem
 import com.github.footballclubsubmission.ui.base.view.MvpView
 
 /**

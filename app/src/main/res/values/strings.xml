@@ -29,4 +29,7 @@
     <string name="text_substitutes">Substitutes</string>
     <string name="text_title_match_detail">Match Detail</string>
     <string name="text_format_date">%1$s, %2$s</string>
+    <string name="prev_match_bnm">Prev match</string>
+    <string name="next_match_bnm">Next match</string>
+    <string name="favorites_bnm">Favorites</string>
 </resources>

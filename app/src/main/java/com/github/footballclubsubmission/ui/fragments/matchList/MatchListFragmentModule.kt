@@ -2,7 +2,6 @@ package com.github.footballclubsubmission.ui.fragments.matchList
 
 import android.support.v7.widget.LinearLayoutManager
 import com.github.footballclubsubmission.data.models.EventLeagueResponse
-import com.github.footballclubsubmission.data.models.EventsItem
 import com.github.footballclubsubmission.ui.adapters.MatchListAdapter
 import com.github.footballclubsubmission.ui.fragments.matchList.interactor.MatchListInteractor
 import com.github.footballclubsubmission.ui.fragments.matchList.interactor.MatchListMvpInteractor
@@ -21,7 +20,7 @@ import dagger.Provides
 class MatchListFragmentModule {
 
     @Provides
-    internal fun provideMatchListInteractor(interactor: MatchListInteractor) : MatchListMvpInteractor = interactor
+    internal fun provideMatchListInteractor(interactor: MatchListInteractor): MatchListMvpInteractor = interactor
 
     @Provides
     internal fun provideMatchListPresenter(presenter: MatchListPresenter<MatchListMvpView, MatchListMvpInteractor>)
@@ -32,5 +31,5 @@ class MatchListFragmentModule {
 
     @Provides
     internal fun provideLinearLayoutManager(fragment: MatchListFragment): LinearLayoutManager =
-            LinearLayoutManager(fragment.activity)
+        LinearLayoutManager(fragment.activity)
 }

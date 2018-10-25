@@ -1,15 +1,11 @@
 package com.github.footballclubsubmission.ui.fragments.matchList.presenter
 
-import android.util.Log
-import com.github.footballclubsubmission.data.models.EventLeagueResponse
 import com.github.footballclubsubmission.ui.base.presenter.BasePresenter
 import com.github.footballclubsubmission.ui.fragments.matchList.interactor.MatchListMvpInteractor
 import com.github.footballclubsubmission.ui.fragments.matchList.view.MatchListFragment
 import com.github.footballclubsubmission.ui.fragments.matchList.view.MatchListMvpView
 import com.github.footballclubsubmission.utils.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
 /**
