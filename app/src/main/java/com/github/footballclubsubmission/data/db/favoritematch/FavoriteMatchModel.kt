@@ -1,8 +1,6 @@
 package com.github.footballclubsubmission.data.db.favoritematch
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
 
 /**
  *  Created by Kei Lazu (Kennix Lazuardi) on 10/25/2018
@@ -99,5 +97,48 @@ data class FavoriteMatchModel(
     var strHomeTeam: String? = null,
 
     @field:SerializedName("intAwayScore")
-    var intAwayScore: String? = null
-)
+    var intAwayScore: String? = null,
+
+    @field:SerializedName("strHomeBadge")
+    var strHomeBadge: String? = null,
+
+    @field:SerializedName("strAwayBadge")
+    var strAwayBadge: String? = null
+) {
+    companion object {
+        const val ID: String = "ID"
+        const val TABLE_FAVORITE: String = "TABLE_FAVORITE"
+        const val IS_FAVORITE: String = "IS_FAV"
+        const val HOME_SHOTS: String = "HOME_SHOTS"
+        const val HOME_LINEUP_DEFENSE: String = "HOME_DEFENSE"
+        const val AWAY_LINEUP_SUBS: String = "AWAY_SUBS"
+        const val HOME_LINEUP_FORWARD: String = "HOME_FORWARD"
+        const val HOME_GOAL_DETAIL: String = "HOME_GOAL_DETAIL"
+        const val AWAY_LINEUP_GOALKEEPER: String = "AWAY_GOALKEEPER"
+        const val AWAY_LINEUP_MIDFIELD: String = "AWAY_MIDFIELD"
+        const val ID_EVENT: String = "ID_EVENT"
+        const val HOME_YELLOW_CARDS: String = "HOME_YELLOW_CARDS"
+        const val HOME_TEAM_ID: String = "ID_HOME"
+        const val HOME_SCORE: String = "HOME_SCORE"
+        const val DATE_EVENT: String = "DATE_EVENT"
+        const val AWAY_TEAM: String = "AWAY_TEAM"
+        const val HOME_LINEUP_MIDFIELD: String = "HOME_MIDFIELD"
+        const val DATE: String = "DATE"
+        const val AWAY_TEAM_ID: String = "ID_AWAY"
+        const val AWAY_RED_CARDS: String = "AWAY_RED_CARDS"
+        const val AWAY_SHOTS: String = "AWAY_SHOTS"
+        const val FILENAME: String = "FILENAME"
+        const val TIME: String = "TIME"
+        const val AWAY_GOAL_DETAIL: String = "AWAY_GOAL_DETAIL"
+        const val AWAY_LINEUP_FORWARD: String = "AWAY_FORWARD"
+        const val HOME_RED_CARDS: String = "HOME_RED_CARDS"
+        const val HOME_LINEUP_GOALKEEPER: String = "HOME_GOALKEEPER"
+        const val HOME_LINEUP_SUBS: String = "HOME_SUBS"
+        const val AWAY_YELLOW_CARDS: String = "AWAY_YELLOW_CARDS"
+        const val AWAY_LINEUP_DEFENSE: String = "AWAY_DEFENSE"
+        const val HOME_TEAM: String = "HOME_TEAM"
+        const val AWAY_SCORE: String = "AWAY_SCORE"
+        const val HOME_BADGE: String = "HOME_BADGE"
+        const val AWAY_BADGE: String = "AWAY_BADGE"
+    }
+}

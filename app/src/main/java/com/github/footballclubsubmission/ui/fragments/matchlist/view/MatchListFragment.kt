@@ -74,7 +74,7 @@ class MatchListFragment : BaseFragment(), MatchListMvpView, MatchListAdapter.Ope
 
     private fun getMode() {
         if (arguments?.isEmpty != true) {
-            var displayMode: Int = arguments?.getInt(BUNDLE_KEY_DISPLAY_MODE) ?: 0
+            val displayMode: Int = arguments?.getInt(BUNDLE_KEY_DISPLAY_MODE) ?: 0
             configMatchList(displayMode)
         }
     }
@@ -102,4 +102,5 @@ class MatchListFragment : BaseFragment(), MatchListMvpView, MatchListAdapter.Ope
 
     override fun showProgress() = match_list_progress_bar.visible()
     override fun hideProgress() = match_list_progress_bar.invisible()
+
 }

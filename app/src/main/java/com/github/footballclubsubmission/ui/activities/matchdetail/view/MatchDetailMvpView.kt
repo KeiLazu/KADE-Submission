@@ -1,5 +1,6 @@
 package com.github.footballclubsubmission.ui.activities.matchdetail.view
 
+import com.github.footballclubsubmission.data.models.EventLeagueResponse
 import com.github.footballclubsubmission.data.models.EventsItem
 import com.github.footballclubsubmission.data.models.TeamsItem
 import com.github.footballclubsubmission.ui.base.view.MvpView
@@ -12,5 +13,4 @@ interface MatchDetailMvpView : MvpView {
 
     fun displayEventDetail(eventsItem: EventsItem)
     fun displayHomeBadge(teamsItem: TeamsItem, isHomeBadge: Boolean)
-
 }

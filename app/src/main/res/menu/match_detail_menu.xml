@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Created by Kei Lazu (Kennix Lazuardi)
+  check https://github.com/KeiLazu for more
+-->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/add_to_fav"
+          android:title="@string/favorites_bnm"
+          android:icon="@drawable/ic_star_border_white_24dp"
+          app:showAsAction="ifRoom"
+    />
+</menu>

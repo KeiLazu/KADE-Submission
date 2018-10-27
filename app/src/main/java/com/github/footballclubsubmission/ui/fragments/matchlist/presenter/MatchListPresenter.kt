@@ -53,5 +53,4 @@ class MatchListPresenter<V : MatchListMvpView, I : MatchListMvpInteractor>
         }
     }
 
-
 }
