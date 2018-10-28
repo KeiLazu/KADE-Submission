@@ -178,6 +178,7 @@ class MatchDetailActivity : BaseActivity(), MatchDetailMvpView {
     }
 
     override fun showMessageRemoveDb() {
+        showMessage(getString(R.string.text_success_remove_from_fav))
         isFavorite = false
         favIconSwitcher()
     }
@@ -191,7 +192,7 @@ class MatchDetailActivity : BaseActivity(), MatchDetailMvpView {
                     "(${FavoriteMatchModel.ID_EVENT} = ${mEventItem.idEvent})"
                 ).exec { parseList(classParser<FavoriteMatchModel>()) }
             if (result.isNotEmpty()) isFavorite = true
-            Log.i(MatchDetailActivity::class.java.simpleName,"result=$result")
+            Log.i(MatchDetailActivity::class.java.simpleName, "result=$result")
         }
     }
 
