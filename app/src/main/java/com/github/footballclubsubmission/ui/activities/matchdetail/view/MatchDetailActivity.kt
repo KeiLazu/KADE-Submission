@@ -2,10 +2,11 @@ package com.github.footballclubsubmission.ui.activities.matchdetail.view
 
 import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.github.footballclubsubmission.R
 import com.github.footballclubsubmission.data.db.favoritematch.FavoriteMatchModel
@@ -21,7 +22,10 @@ import com.github.footballclubsubmission.utils.visible
 import kotlinx.android.synthetic.main.activity_match_detail.*
 import kotlinx.android.synthetic.main.include_match_detail_information.*
 import kotlinx.android.synthetic.main.include_match_detail_score.*
-import org.jetbrains.anko.db.insert
+import org.jetbrains.anko.db.classParser
+import org.jetbrains.anko.db.delete
+import org.jetbrains.anko.db.parseList
+import org.jetbrains.anko.db.select
 import javax.inject.Inject
 
 class MatchDetailActivity : BaseActivity(), MatchDetailMvpView {
@@ -31,11 +35,11 @@ class MatchDetailActivity : BaseActivity(), MatchDetailMvpView {
         const val DATE_PATTERN = "yyyy-MM-dd"
     }
 
-    private var menuItem: Menu? = null
+    private var mMenuItem: Menu? = null
     private var isFavorite: Boolean = false
-    private var eventItem: EventsItem = EventsItem()
-    private var homeBadge: String? = null
-    private var awayBadge: String? = null
+    private var mEventItem: EventsItem = EventsItem()
+    private var mHomeBadge: String? = null
+    private var mAwayBadge: String? = null
 
     @Inject
     internal lateinit var presenter: MatchDetailMvpPresenter<MatchDetailMvpView, MatchDetailMvpInteractor>
@@ -59,30 +63,30 @@ class MatchDetailActivity : BaseActivity(), MatchDetailMvpView {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.match_detail_menu, menu)
-        menuItem = menu
+        mMenuItem = menu
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            android.R.id.home -> {finish(); true}
-            R.id.add_to_fav -> {addToFav(); true}
+            android.R.id.home -> {
+                finish(); true
+            }
+            R.id.add_to_fav -> {
+                favLogicSwitcher(); true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    private fun initGetDataApi() {
-        presenter.onViewCreated(intent.getIntExtra(BUNDLE_KEY_EVENT_ID, 0))
-    }
+    private fun initGetDataApi() = presenter.onViewCreated(intent.getIntExtra(BUNDLE_KEY_EVENT_ID, 0))
 
     override fun showProgress() {
         if (match_detail_progress_bar.visibility == View.VISIBLE) hideProgress()
         match_detail_progress_bar.visible()
     }
 
-    override fun hideProgress() {
-        match_detail_progress_bar.invisible()
-    }
+    override fun hideProgress() = match_detail_progress_bar.invisible()
 
     override fun onDestroy() {
         presenter.onDetach()
@@ -90,6 +94,13 @@ class MatchDetailActivity : BaseActivity(), MatchDetailMvpView {
     }
 
     override fun displayEventDetail(eventsItem: EventsItem) {
+        initWidgets(eventsItem)
+        initEventData(eventsItem)
+        isEventFavorited()
+        favIconSwitcher()
+    }
+
+    private fun initWidgets(eventsItem: EventsItem) {
         putScoreInfo(eventsItem)
         putGoalsInfo(eventsItem)
         putShotsInfo(eventsItem)
@@ -97,7 +108,6 @@ class MatchDetailActivity : BaseActivity(), MatchDetailMvpView {
         putAwayLineupsInfo(eventsItem)
         getBadge(eventsItem.idHomeTeam?.toInt() ?: 0, true)
         getBadge(eventsItem.idAwayTeam?.toInt() ?: 0, false)
-        initEventData(eventsItem)
     }
 
     private fun putScoreInfo(eventsItem: EventsItem) {
@@ -140,22 +150,17 @@ class MatchDetailActivity : BaseActivity(), MatchDetailMvpView {
         include_match_detail_info_away_subs.text = replaceItemLineup(eventsItem.strAwayLineupSubstitutes)
     }
 
-    private fun replaceItemLineup(eventsItemOutput: String?): String? {
-        return eventsItemOutput?.replace("; ", ";\n")
-    }
+    private fun replaceItemLineup(eventsItemOutput: String?): String? = eventsItemOutput?.replace("; ", ";\n")
 
-    private fun getBadge(teamId: Int, isHomeBadge: Boolean) {
-        presenter.getTeamBadge(teamId, isHomeBadge)
-    }
+    private fun getBadge(teamId: Int, isHomeBadge: Boolean) = presenter.getTeamBadge(teamId, isHomeBadge)
 
     override fun displayHomeBadge(teamsItem: TeamsItem, isHomeBadge: Boolean) {
         if (isHomeBadge) {
             Glide.with(this).load(teamsItem.strTeamBadge).fitCenter().into(include_match_detail_score_img_home_club)
-            homeBadge = teamsItem.strTeamBadge
-        }
-        else {
+            mHomeBadge = teamsItem.strTeamBadge
+        } else {
             Glide.with(this).load(teamsItem.strTeamBadge).fitCenter().into(include_match_detail_score_img_away_club)
-            awayBadge = teamsItem.strTeamBadge
+            mAwayBadge = teamsItem.strTeamBadge
         }
     }
 
@@ -163,44 +168,55 @@ class MatchDetailActivity : BaseActivity(), MatchDetailMvpView {
     override fun onFragmentDetached(tag: String) {}
 
     private fun initEventData(eventsItem: EventsItem) {
-        this.eventItem = eventsItem
+        mEventItem = eventsItem
     }
 
-    fun addToFav() {
+    override fun showMessageAddDb() {
+        showMessage(getString(R.string.text_success_add_to_fav))
+        isFavorite = true
+        favIconSwitcher()
+    }
+
+    override fun showMessageRemoveDb() {
+        isFavorite = false
+        favIconSwitcher()
+    }
+
+    override fun showMessageError() = showMessage(getString(R.string.text_generic_error))
+
+    private fun isEventFavorited() {
+        matchDb.use {
+            val result = select(FavoriteMatchModel.TABLE_FAVORITE)
+                .whereArgs(
+                    "(${FavoriteMatchModel.ID_EVENT} = ${mEventItem.idEvent})"
+                ).exec { parseList(classParser<FavoriteMatchModel>()) }
+            if (result.isNotEmpty()) isFavorite = true
+            Log.i(MatchDetailActivity::class.java.simpleName,"result=$result")
+        }
+    }
+
+    private fun removeFromFavorite() {
         try {
             matchDb.use {
-                insert(
-                    FavoriteMatchModel.TABLE_FAVORITE,
-                    FavoriteMatchModel.ID_EVENT to eventItem.idEvent,
-                    FavoriteMatchModel.DATE_EVENT to eventItem.dateEvent,
-                    FavoriteMatchModel.HOME_TEAM_ID to eventItem.idHomeTeam,
-                    FavoriteMatchModel.AWAY_TEAM_ID to eventItem.idAwayTeam,
-                    FavoriteMatchModel.HOME_TEAM to eventItem.strHomeTeam,
-                    FavoriteMatchModel.AWAY_TEAM to eventItem.strAwayTeam,
-                    FavoriteMatchModel.HOME_SCORE to eventItem.intHomeScore,
-                    FavoriteMatchModel.AWAY_SCORE to eventItem.intAwayScore,
-                    FavoriteMatchModel.HOME_GOAL_DETAIL to eventItem.strHomeGoalDetails,
-                    FavoriteMatchModel.AWAY_GOAL_DETAIL to eventItem.strAwayGoalDetails,
-                    FavoriteMatchModel.HOME_SHOTS to eventItem.intHomeShots,
-                    FavoriteMatchModel.AWAY_SHOTS to eventItem.intAwayShots,
-                    FavoriteMatchModel.HOME_LINEUP_GOALKEEPER to eventItem.strHomeLineupGoalkeeper,
-                    FavoriteMatchModel.AWAY_LINEUP_GOALKEEPER to eventItem.strAwayLineupGoalkeeper,
-                    FavoriteMatchModel.HOME_LINEUP_DEFENSE to eventItem.strHomeLineupDefense,
-                    FavoriteMatchModel.AWAY_LINEUP_DEFENSE to eventItem.strAwayLineupDefense,
-                    FavoriteMatchModel.HOME_LINEUP_MIDFIELD to eventItem.strHomeLineupMidfield,
-                    FavoriteMatchModel.AWAY_LINEUP_MIDFIELD to eventItem.strAwayLineupMidfield,
-                    FavoriteMatchModel.HOME_LINEUP_FORWARD to eventItem.strHomeLineupForward,
-                    FavoriteMatchModel.AWAY_LINEUP_FORWARD to eventItem.strAwayLineupForward,
-                    FavoriteMatchModel.HOME_LINEUP_SUBS to eventItem.strHomeLineupSubstitutes,
-                    FavoriteMatchModel.AWAY_LINEUP_SUBS to eventItem.strAwayLineupSubstitutes,
-                    FavoriteMatchModel.HOME_BADGE to homeBadge,
-                    FavoriteMatchModel.AWAY_BADGE to awayBadge
+                delete(
+                    FavoriteMatchModel.TABLE_FAVORITE, "(${FavoriteMatchModel.ID_EVENT} = ${mEventItem.idEvent})",
+                    FavoriteMatchModel.ID_EVENT to mEventItem.idEvent.toString()
                 )
             }
-            Toast.makeText(this, getString(R.string.text_success_add_to_fav), Toast.LENGTH_SHORT).show()
+            showMessageRemoveDb()
         } catch (e: SQLiteConstraintException) {
-            Toast.makeText(this, getString(R.string.text_generic_error), Toast.LENGTH_SHORT).show()
+            showMessageError()
         }
+    }
+
+    private fun favIconSwitcher() {
+        if (isFavorite) mMenuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_star_white_24dp)
+        else mMenuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_star_border_white_24dp)
+    }
+
+    private fun favLogicSwitcher() {
+        if (isFavorite) removeFromFavorite()
+        else presenter.addToFav(matchDb, mEventItem, mHomeBadge, mAwayBadge)
     }
 
 }

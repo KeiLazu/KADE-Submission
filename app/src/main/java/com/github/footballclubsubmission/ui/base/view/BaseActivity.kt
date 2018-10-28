@@ -2,6 +2,7 @@ package com.github.footballclubsubmission.ui.base.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import dagger.android.AndroidInjection
 
 /**
@@ -20,4 +21,8 @@ abstract class BaseActivity : AppCompatActivity(), MvpView, BaseFragment.Callbac
     override fun hideProgress() {}
 
     private fun performDI() = AndroidInjection.inject(this)
+
+    override fun showMessage(message: String) {
+        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+    }
 }

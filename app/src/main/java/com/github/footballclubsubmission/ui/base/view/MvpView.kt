@@ -7,4 +7,5 @@ package com.github.footballclubsubmission.ui.base.view
 interface MvpView {
     fun showProgress()
     fun hideProgress()
+    fun showMessage(message: String)
 }

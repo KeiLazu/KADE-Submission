@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.View
+import android.widget.Toast
 import dagger.android.support.AndroidSupportInjection
 
 /**
@@ -47,6 +48,10 @@ abstract class BaseFragment : Fragment(), MvpView {
     interface Callback {
         fun onFragmentAttached()
         fun onFragmentDetached(tag: String)
+    }
+
+    override fun showMessage(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     abstract fun setUp()

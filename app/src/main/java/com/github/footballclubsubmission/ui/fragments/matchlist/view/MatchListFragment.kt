@@ -10,8 +10,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.footballclubsubmission.R
+import com.github.footballclubsubmission.data.db.favoritematch.FavoriteMatchModel
+import com.github.footballclubsubmission.data.db.favoritematch.matchDb
 import com.github.footballclubsubmission.data.models.EventLeagueResponse
 import com.github.footballclubsubmission.ui.activities.matchdetail.view.MatchDetailActivity
+import com.github.footballclubsubmission.ui.adapters.FavoriteListAdapter
 import com.github.footballclubsubmission.ui.adapters.MatchListAdapter
 import com.github.footballclubsubmission.ui.base.view.BaseFragment
 import com.github.footballclubsubmission.ui.fragments.matchlist.interactor.MatchListMvpInteractor
@@ -34,10 +37,13 @@ class MatchListFragment : BaseFragment(), MatchListMvpView, MatchListAdapter.Ope
     internal lateinit var mLayoutManager: LinearLayoutManager
     @Inject
     internal lateinit var mMatchListAdapter: MatchListAdapter
+    @Inject
+    internal lateinit var mFavoriteListAdapter: FavoriteListAdapter
 
     companion object {
         const val DISPLAY_MODE_NEXT_MATCH: Int = 1
         const val DISPLAY_MODE_LAST_MATCH: Int = 2
+        const val DISPLAY_MODE_FAV: Int = 3
 
         private const val BUNDLE_KEY_DISPLAY_MODE: String = "BUNDLE_KEY_DISPLAY_MODE"
         fun newInstance(displayMode: Int): MatchListFragment {
@@ -52,6 +58,7 @@ class MatchListFragment : BaseFragment(), MatchListMvpView, MatchListAdapter.Ope
             return when (displayMode) {
                 DISPLAY_MODE_LAST_MATCH -> context.getString(R.string.last_match_simple_name)
                 DISPLAY_MODE_NEXT_MATCH -> context.getString(R.string.next_match_simple_name)
+                DISPLAY_MODE_FAV -> context.getString(R.string.favorites_simple_name)
                 else -> MatchListFragment::class.java.simpleName
             }
         }
@@ -82,12 +89,16 @@ class MatchListFragment : BaseFragment(), MatchListMvpView, MatchListAdapter.Ope
     private fun configMatchList(displayMode: Int) {
         mLayoutManager.orientation = LinearLayoutManager.VERTICAL
         match_list_rv_match.apply {
-            layoutManager = mLayoutManager; itemAnimator = DefaultItemAnimator(); adapter = mMatchListAdapter
+            layoutManager = mLayoutManager; itemAnimator = DefaultItemAnimator(); adapter =
+                if (displayMode != DISPLAY_MODE_FAV) mMatchListAdapter else mFavoriteListAdapter
         }
         mMatchListAdapter.setMatchListInterface(this)
-        presenter.onViewPrepared(displayMode)
+        presenter.onViewPrepared(displayMode, getBaseActivity()?.matchDb)
         match_list_srl.setOnRefreshListener {
-            presenter.onViewPrepared(displayMode); match_list_srl.isRefreshing = true
+            presenter.onViewPrepared(
+                displayMode,
+                getBaseActivity()?.matchDb
+            ); match_list_srl.isRefreshing = displayMode != DISPLAY_MODE_FAV
         }
     }
 
@@ -98,6 +109,10 @@ class MatchListFragment : BaseFragment(), MatchListMvpView, MatchListAdapter.Ope
     override fun putDataMatchList(eventLeagueResponse: EventLeagueResponse) {
         mMatchListAdapter.addMatchList(eventLeagueResponse.events)
         match_list_srl.isRefreshing = false
+    }
+
+    override fun putFavData(result: List<FavoriteMatchModel>) {
+        mFavoriteListAdapter.addFavList(result.toMutableList())
     }
 
     override fun showProgress() = match_list_progress_bar.visible()

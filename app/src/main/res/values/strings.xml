@@ -35,6 +35,7 @@
     <string name="next_match_simple_name">Next Match</string>
     <string name="text_example">Example</string>
     <string name="text_zero">0</string>
-    <string name="text_generic_error">Error</string>
+    <string name="text_generic_error">Something is wrong</string>
     <string name="text_success_add_to_fav">Added to favorites</string>
+    <string name="favorites_simple_name">Favorites</string>
 </resources>

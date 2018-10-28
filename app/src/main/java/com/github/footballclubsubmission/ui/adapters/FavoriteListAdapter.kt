@@ -5,46 +5,40 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.footballclubsubmission.R
-import com.github.footballclubsubmission.data.models.EventLeagueResponse
-import com.github.footballclubsubmission.data.models.EventsItem
+import com.github.footballclubsubmission.data.db.favoritematch.FavoriteMatchModel
 import com.github.footballclubsubmission.ui.activities.matchdetail.view.MatchDetailActivity
 import com.github.footballclubsubmission.utils.dateConverterDate
 import kotlinx.android.synthetic.main.list_item_match_list.view.*
+import org.jetbrains.anko.startActivity
 
 /**
- *  Created by Kei Lazu (Kennix Lazuardi) on 10/20/2018
+ *  Created by Kei Lazu (Kennix Lazuardi) on 10/28/2018
  *  check https://github.com/KeiLazu for more
  */
-class MatchListAdapter(private val response: EventLeagueResponse) :
-    RecyclerView.Adapter<MatchListAdapter.ViewHolder>() {
+class FavoriteListAdapter(private val response: MutableList<FavoriteMatchModel>) :
+    RecyclerView.Adapter<FavoriteListAdapter.ViewHolder>() {
 
-    lateinit var openMatchDetailActivity: OpenMatchDetailActivity
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.list_item_match_list, parent, false
-            )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
+        LayoutInflater.from(parent.context).inflate(
+            R.layout.list_item_match_list, parent, false
         )
+    )
 
-    override fun getItemCount(): Int = this.response.events.size
+    override fun getItemCount(): Int = response.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.let {
-        it.clear()
-        it.bind(position)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.clear()
+        holder.bind(position)
+        holder.setItemClickListener(response[position].idEvent)
     }
 
-    internal fun addMatchList(eventsItems: MutableList<EventsItem>) {
-        this.response.events.addAll(eventsItems)
+    internal fun addFavList(eventsItems: MutableList<FavoriteMatchModel>) {
+        response.clear()
+        this.response.addAll(eventsItems)
         notifyDataSetChanged()
     }
 
-    internal fun setMatchListInterface(openMatchDetailActivity: OpenMatchDetailActivity) {
-        this.openMatchDetailActivity = openMatchDetailActivity
-    }
-
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
         fun clear() {
             itemView.list_item_match_list_date_time.text = ""
             itemView.list_item_match_list_home_name_club.text = ""
@@ -53,8 +47,8 @@ class MatchListAdapter(private val response: EventLeagueResponse) :
             itemView.list_item_match_list_away_score.text = "0"
         }
 
-        private fun getIndividualData(position: Int): EventsItem? {
-            return response.events[position]
+        private fun getIndividualData(position: Int): FavoriteMatchModel? {
+            return response[position]
         }
 
         fun bind(position: Int) {
@@ -63,14 +57,13 @@ class MatchListAdapter(private val response: EventLeagueResponse) :
                 getIndividualData(position)?.strHomeTeam,
                 getIndividualData(position)?.strAwayTeam,
                 getIndividualData(position)?.intHomeScore,
-                getIndividualData(position)?.intAwayScore
+                getIndividualData(position)?.intAwayScore.toString()
             )
-            setItemClickListener(position)
         }
 
-        private fun setItemClickListener(position: Int) {
+        fun setItemClickListener(eventId: Int?) {
             itemView.setOnClickListener {
-                openMatchDetailActivity.openMatchDetailActivity(getIndividualData(position)?.idEvent ?: 0)
+                itemView.context.startActivity<MatchDetailActivity>(MatchDetailActivity.BUNDLE_KEY_EVENT_ID to eventId)
             }
         }
 
@@ -90,11 +83,5 @@ class MatchListAdapter(private val response: EventLeagueResponse) :
             scoreHome?.let { itemView.list_item_match_list_home_score.text = it }
             scoreAway?.let { itemView.list_item_match_list_away_score.text = it }
         }
-
     }
-
-    interface OpenMatchDetailActivity {
-        fun openMatchDetailActivity(eventId: Int)
-    }
-
 }

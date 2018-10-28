@@ -1,5 +1,6 @@
 package com.github.footballclubsubmission.ui.fragments.matchlist.view
 
+import com.github.footballclubsubmission.data.db.favoritematch.FavoriteMatchModel
 import com.github.footballclubsubmission.data.models.EventLeagueResponse
 import com.github.footballclubsubmission.ui.base.view.MvpView
 
@@ -10,5 +11,6 @@ import com.github.footballclubsubmission.ui.base.view.MvpView
 interface MatchListMvpView : MvpView {
 
     fun putDataMatchList(eventLeagueResponse: EventLeagueResponse)
+    fun putFavData(result: List<FavoriteMatchModel>)
 
 }

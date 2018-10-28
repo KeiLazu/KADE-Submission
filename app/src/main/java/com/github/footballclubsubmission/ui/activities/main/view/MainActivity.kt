@@ -33,8 +33,7 @@ class MainActivity : BaseActivity(), HasSupportFragmentInjector {
             when (it.itemId) {
                 prev_match -> setPrevMatchFragment(savedInstanceState)
                 next_match -> setNextMatchFragment(savedInstanceState)
-                favorites -> {
-                }
+                favorites -> setFavoriteFragment(savedInstanceState)
             }
             true
         }
@@ -60,6 +59,16 @@ class MainActivity : BaseActivity(), HasSupportFragmentInjector {
                 MatchListFragment.newInstance(MatchListFragment.DISPLAY_MODE_NEXT_MATCH),
                 MatchListFragment.getSimpleName(this, MatchListFragment.DISPLAY_MODE_NEXT_MATCH)
             )
+    }
+
+    private fun setFavoriteFragment(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            settingFragment(
+                R.id.main_fragment_container,
+                MatchListFragment.newInstance(MatchListFragment.DISPLAY_MODE_FAV),
+                MatchListFragment.getSimpleName(this, MatchListFragment.DISPLAY_MODE_FAV)
+            )
+        }
     }
 
 }
