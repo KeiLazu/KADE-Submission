@@ -2,6 +2,7 @@ package com.github.footballclubsubmission.ui.base.presenter
 
 import com.github.footballclubsubmission.ui.base.interactor.MvpInteractor
 import com.github.footballclubsubmission.ui.base.view.MvpView
+import com.github.footballclubsubmission.utils.AppSchedulerProvider
 import com.github.footballclubsubmission.utils.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
 

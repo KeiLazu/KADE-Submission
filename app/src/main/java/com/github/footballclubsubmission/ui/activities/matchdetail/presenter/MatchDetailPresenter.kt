@@ -8,6 +8,7 @@ import com.github.footballclubsubmission.data.models.EventsItem
 import com.github.footballclubsubmission.ui.activities.matchdetail.interactor.MatchDetailMvpInteractor
 import com.github.footballclubsubmission.ui.activities.matchdetail.view.MatchDetailMvpView
 import com.github.footballclubsubmission.ui.base.presenter.BasePresenter
+import com.github.footballclubsubmission.utils.AppSchedulerProvider
 import com.github.footballclubsubmission.utils.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
 import org.jetbrains.anko.db.insert
@@ -24,11 +25,7 @@ class MatchDetailPresenter<V : MatchDetailMvpView, I : MatchDetailMvpInteractor>
     compositeDisposable: CompositeDisposable
 ) : BasePresenter<V, I>(interactor, schedulerProvider, compositeDisposable), MatchDetailMvpPresenter<V, I> {
 
-    override fun onViewCreated(eventId: Int) {
-        getEventDetail(eventId)
-    }
-
-    private fun getEventDetail(eventId: Int) {
+    override fun getEventDetail(eventId: Int) {
         getView()?.showProgress()
         interactor?.let { it ->
             it.getEventDetailApi(eventId)

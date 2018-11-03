@@ -79,7 +79,7 @@ class MatchDetailActivity : BaseActivity(), MatchDetailMvpView {
         }
     }
 
-    private fun initGetDataApi() = presenter.onViewCreated(intent.getIntExtra(BUNDLE_KEY_EVENT_ID, 0))
+    private fun initGetDataApi() = presenter.getEventDetail(intent.getIntExtra(BUNDLE_KEY_EVENT_ID, 0))
 
     override fun showProgress() {
         if (match_detail_progress_bar.visibility == View.VISIBLE) hideProgress()

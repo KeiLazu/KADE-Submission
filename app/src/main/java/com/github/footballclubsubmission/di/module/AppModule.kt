@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.github.footballclubsubmission.data.network.ApiHelper
 import com.github.footballclubsubmission.data.network.AppApiHelper
+import com.github.footballclubsubmission.utils.AppSchedulerProvider
 import com.github.footballclubsubmission.utils.SchedulerProvider
 import dagger.Module
 import dagger.Provides
@@ -25,7 +26,7 @@ class AppModule {
     internal fun provideCompositeDisposable(): CompositeDisposable = CompositeDisposable()
 
     @Provides
-    internal fun provideSchedulerProvider(): SchedulerProvider = SchedulerProvider()
+    internal fun provideSchedulerProvider(): SchedulerProvider = AppSchedulerProvider()
 
     @Provides
     @Singleton

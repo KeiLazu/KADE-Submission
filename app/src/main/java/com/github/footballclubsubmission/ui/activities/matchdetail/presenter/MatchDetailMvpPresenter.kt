@@ -11,7 +11,7 @@ import com.github.footballclubsubmission.ui.base.presenter.MvpPresenter
  *  check https://github.com/KeiLazu for more
  */
 interface MatchDetailMvpPresenter<V : MatchDetailMvpView, I : MatchDetailMvpInteractor> : MvpPresenter<V, I> {
-    fun onViewCreated(eventId: Int)
+    fun getEventDetail(eventId: Int)
     fun getTeamBadge(teamId: Int, isHomeBadge: Boolean)
     fun addToFav(
         matchDb: FavoriteMatchRepository,

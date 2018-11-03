@@ -1,13 +1,12 @@
 package com.github.footballclubsubmission.ui.fragments.matchlist.presenter
 
-import android.util.Log
 import com.github.footballclubsubmission.data.db.favoritematch.FavoriteMatchModel
 import com.github.footballclubsubmission.data.db.favoritematch.FavoriteMatchRepository
-import com.github.footballclubsubmission.data.models.EventLeagueResponse
 import com.github.footballclubsubmission.ui.base.presenter.BasePresenter
 import com.github.footballclubsubmission.ui.fragments.matchlist.interactor.MatchListMvpInteractor
 import com.github.footballclubsubmission.ui.fragments.matchlist.view.MatchListFragment
 import com.github.footballclubsubmission.ui.fragments.matchlist.view.MatchListMvpView
+import com.github.footballclubsubmission.utils.AppSchedulerProvider
 import com.github.footballclubsubmission.utils.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
 import org.jetbrains.anko.db.classParser
