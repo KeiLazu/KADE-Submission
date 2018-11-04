@@ -30,12 +30,14 @@ class MatchDetailPresenter<V : MatchDetailMvpView, I : MatchDetailMvpInteractor>
         interactor?.let { it ->
             it.getEventDetailApi(eventId)
                 .compose(schedulerProvider.ioToMainObservableScheduler())
-                .subscribe { EventLeagueResponse ->
+                .subscribe ({ EventLeagueResponse ->
                     getView()?.let {
                         it.hideProgress()
-                        it.displayEventDetail(EventLeagueResponse.events[0])
+                        it.displayEventDetail(EventLeagueResponse)
                     }
-                }
+                }, { throwable ->
+//                    Log.i(MatchDetailPresenter::class.java.simpleName, "ERROR:\n$throwable")
+                })
         }
     }
 

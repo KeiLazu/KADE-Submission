@@ -1,15 +1,13 @@
 package com.github.footballclubsubmission.utils
 
 import io.reactivex.*
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.schedulers.TestScheduler
 
 /**
  *  Created by Kei Lazu (Kennix Lazuardi) on 11/3/2018
  *  check https://github.com/KeiLazu for more
  */
-class TestSchedulerProvider(private val testScheduler: TestScheduler): SchedulerProvider {
+class TestSchedulerProvider : SchedulerProvider {
 
     override fun <T> ioToMainObservableScheduler(): ObservableTransformer<T, T> = ObservableTransformer { upstream ->
         upstream.subscribeOn(getIOThreadScheduler())
@@ -39,7 +37,7 @@ class TestSchedulerProvider(private val testScheduler: TestScheduler): Scheduler
             .observeOn(getMainThreadScheduler())
     }
 
-    private fun getIOThreadScheduler() = testScheduler
+    private fun getIOThreadScheduler() = Schedulers.trampoline()
 
-    private fun getMainThreadScheduler() = testScheduler
+    private fun getMainThreadScheduler() = Schedulers.trampoline()
 }

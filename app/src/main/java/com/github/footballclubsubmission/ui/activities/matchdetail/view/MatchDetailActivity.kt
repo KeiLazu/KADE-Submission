@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.github.footballclubsubmission.R
 import com.github.footballclubsubmission.data.db.favoritematch.FavoriteMatchModel
 import com.github.footballclubsubmission.data.db.favoritematch.matchDb
+import com.github.footballclubsubmission.data.models.EventLeagueResponse
 import com.github.footballclubsubmission.data.models.EventsItem
 import com.github.footballclubsubmission.data.models.TeamsItem
 import com.github.footballclubsubmission.ui.activities.matchdetail.interactor.MatchDetailMvpInteractor
@@ -93,9 +94,9 @@ class MatchDetailActivity : BaseActivity(), MatchDetailMvpView {
         super.onDestroy()
     }
 
-    override fun displayEventDetail(eventsItem: EventsItem) {
-        initWidgets(eventsItem)
-        initEventData(eventsItem)
+    override fun displayEventDetail(eventLeagueResponse: EventLeagueResponse) {
+        initWidgets(eventLeagueResponse.events[0])
+        initEventData(eventLeagueResponse.events[0])
         isEventFavorited()
         favIconSwitcher()
     }

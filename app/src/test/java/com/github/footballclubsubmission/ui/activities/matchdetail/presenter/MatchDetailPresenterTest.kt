@@ -1,6 +1,7 @@
 package com.github.footballclubsubmission.ui.activities.matchdetail.presenter
 
 import com.github.footballclubsubmission.data.models.EventLeagueResponse
+import com.github.footballclubsubmission.data.models.EventsItem
 import com.github.footballclubsubmission.data.network.ApiHelper
 import com.github.footballclubsubmission.data.network.AppApiHelper
 import com.github.footballclubsubmission.ui.activities.matchdetail.interactor.MatchDetailInteractor
@@ -26,29 +27,26 @@ class MatchDetailPresenterTest {
     private lateinit var presenter: MatchDetailPresenter<MatchDetailMvpView, MatchDetailMvpInteractor>
     val mView: MatchDetailActivity = mock()
     val mInteractor: MatchDetailInteractor = mock()
-    val testScheduler: TestScheduler = TestScheduler()
 
     @Before
     fun setUp() {
         val compositeDisposable = CompositeDisposable()
-        presenter = MatchDetailPresenter(mInteractor, TestSchedulerProvider(testScheduler), compositeDisposable)
+        presenter = MatchDetailPresenter(mInteractor, TestSchedulerProvider(), compositeDisposable)
         presenter.onAttach(mView)
     }
 
     @Test
     fun getEventDetail() {
         val eventLeagueResponseMocked: EventLeagueResponse = mock()
-        val appApiHelper: AppApiHelper = mock()
 
         doReturn(Observable.just(eventLeagueResponseMocked))
-            .`when`(appApiHelper)
+            .`when`(mInteractor)
             .getEventDetailApi(4328)
 
         presenter.getEventDetail(4328)
-        testScheduler.triggerActions()
 
         verify(mView).showProgress()
-        verify(mView).displayEventDetail(eventLeagueResponseMocked.events[0])
+        verify(mView).displayEventDetail(eventLeagueResponseMocked)
         verify(mView).hideProgress()
 
     }
