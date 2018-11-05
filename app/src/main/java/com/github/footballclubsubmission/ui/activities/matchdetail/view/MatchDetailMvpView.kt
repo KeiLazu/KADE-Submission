@@ -2,6 +2,7 @@ package com.github.footballclubsubmission.ui.activities.matchdetail.view
 
 import com.github.footballclubsubmission.data.models.EventLeagueResponse
 import com.github.footballclubsubmission.data.models.EventsItem
+import com.github.footballclubsubmission.data.models.TeamResponse
 import com.github.footballclubsubmission.data.models.TeamsItem
 import com.github.footballclubsubmission.ui.base.view.MvpView
 
@@ -12,8 +13,8 @@ import com.github.footballclubsubmission.ui.base.view.MvpView
 interface MatchDetailMvpView : MvpView {
 
     fun displayEventDetail(eventLeagueResponse: EventLeagueResponse)
-    fun displayHomeBadge(teamsItem: TeamsItem, isHomeBadge: Boolean)
     fun showMessageAddDb()
     fun showMessageRemoveDb()
     fun showMessageError()
+    fun displayHomeBadge(teamsItem: TeamResponse, isHomeBadge: Boolean)
 }

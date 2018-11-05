@@ -36,7 +36,7 @@ class MatchListPresenter<V : MatchListMvpView, I : MatchListMvpInteractor>
         }
     }
 
-    private fun getLastMatchApi() {
+    fun getLastMatchApi() {
         interactor?.let { it ->
             it.getLastMatchApi()
                 .compose(schedulerProvider.ioToMainObservableScheduler())
@@ -49,7 +49,7 @@ class MatchListPresenter<V : MatchListMvpView, I : MatchListMvpInteractor>
         }
     }
 
-    private fun getNextMatchApi() {
+    fun getNextMatchApi() {
         interactor?.let { it ->
             it.getNextMatchApi()
                 .compose(schedulerProvider.ioToMainObservableScheduler())
@@ -62,7 +62,7 @@ class MatchListPresenter<V : MatchListMvpView, I : MatchListMvpInteractor>
         }
     }
 
-    private fun getFavData(matchDb: FavoriteMatchRepository?) {
+    fun getFavData(matchDb: FavoriteMatchRepository?) {
         matchDb?.use {
             val result = select(FavoriteMatchModel.TABLE_FAVORITE).parseList(classParser<FavoriteMatchModel>())
             getView()?.let {

@@ -13,6 +13,7 @@ import com.github.footballclubsubmission.data.db.favoritematch.FavoriteMatchMode
 import com.github.footballclubsubmission.data.db.favoritematch.matchDb
 import com.github.footballclubsubmission.data.models.EventLeagueResponse
 import com.github.footballclubsubmission.data.models.EventsItem
+import com.github.footballclubsubmission.data.models.TeamResponse
 import com.github.footballclubsubmission.data.models.TeamsItem
 import com.github.footballclubsubmission.ui.activities.matchdetail.interactor.MatchDetailMvpInteractor
 import com.github.footballclubsubmission.ui.activities.matchdetail.presenter.MatchDetailMvpPresenter
@@ -155,13 +156,13 @@ class MatchDetailActivity : BaseActivity(), MatchDetailMvpView {
 
     private fun getBadge(teamId: Int, isHomeBadge: Boolean) = presenter.getTeamBadge(teamId, isHomeBadge)
 
-    override fun displayHomeBadge(teamsItem: TeamsItem, isHomeBadge: Boolean) {
+    override fun displayHomeBadge(teamsItem: TeamResponse, isHomeBadge: Boolean) {
         if (isHomeBadge) {
-            Glide.with(this).load(teamsItem.strTeamBadge).fitCenter().into(include_match_detail_score_img_home_club)
-            mHomeBadge = teamsItem.strTeamBadge
+            Glide.with(this).load(teamsItem.teams[0].strTeamBadge).fitCenter().into(include_match_detail_score_img_home_club)
+            mHomeBadge = teamsItem.teams[0].strTeamBadge
         } else {
-            Glide.with(this).load(teamsItem.strTeamBadge).fitCenter().into(include_match_detail_score_img_away_club)
-            mAwayBadge = teamsItem.strTeamBadge
+            Glide.with(this).load(teamsItem.teams[0].strTeamBadge).fitCenter().into(include_match_detail_score_img_away_club)
+            mAwayBadge = teamsItem.teams[0].strTeamBadge
         }
     }
 
@@ -201,7 +202,8 @@ class MatchDetailActivity : BaseActivity(), MatchDetailMvpView {
         try {
             matchDb.use {
                 delete(
-                    FavoriteMatchModel.TABLE_FAVORITE, "(${FavoriteMatchModel.ID_EVENT} = ${mEventItem.idEvent})",
+                    FavoriteMatchModel.TABLE_FAVORITE,
+                    "(${FavoriteMatchModel.ID_EVENT} = ${mEventItem.idEvent})",
                     FavoriteMatchModel.ID_EVENT to mEventItem.idEvent.toString()
                 )
             }

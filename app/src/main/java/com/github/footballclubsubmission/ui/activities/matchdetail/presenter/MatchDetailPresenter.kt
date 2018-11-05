@@ -11,6 +11,7 @@ import com.github.footballclubsubmission.ui.base.presenter.BasePresenter
 import com.github.footballclubsubmission.utils.AppSchedulerProvider
 import com.github.footballclubsubmission.utils.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
+import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import javax.inject.Inject
 
@@ -47,8 +48,8 @@ class MatchDetailPresenter<V : MatchDetailMvpView, I : MatchDetailMvpInteractor>
                 .compose(schedulerProvider.ioToMainObservableScheduler())
                 .subscribe { response ->
                     getView()?.let {
-                        if (isHomeBadge) it.displayHomeBadge(response.teams[0], true)
-                        else it.displayHomeBadge(response.teams[0], false)
+                        if (isHomeBadge) it.displayHomeBadge(response, true)
+                        else it.displayHomeBadge(response, false)
                     }
                 }
         }
@@ -91,10 +92,24 @@ class MatchDetailPresenter<V : MatchDetailMvpView, I : MatchDetailMvpInteractor>
                 )
             }
             getView()?.showMessageAddDb()
-            Log.i(MatchDetailPresenter::class.java.simpleName, "added to db")
         } catch (e: SQLiteConstraintException) {
             getView()?.showMessageError()
-            Log.e(MatchDetailPresenter::class.java.simpleName, "error:\n$e")
         }
     }
+
+    override fun removeFromFav(matchDb: FavoriteMatchRepository, eventItem: EventsItem) {
+        try {
+            matchDb.use {
+                delete(
+                    FavoriteMatchModel.TABLE_FAVORITE,
+                    "(${FavoriteMatchModel.ID_EVENT} = ${eventItem.idEvent})",
+                    FavoriteMatchModel.ID_EVENT to eventItem.idEvent.toString()
+                )
+            }
+            getView()?.showMessageRemoveDb()
+        } catch (e: SQLiteConstraintException) {
+            getView()?.showMessageError()
+        }
+    }
+
 }

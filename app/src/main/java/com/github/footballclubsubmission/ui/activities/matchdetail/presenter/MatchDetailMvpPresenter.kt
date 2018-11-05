@@ -19,4 +19,6 @@ interface MatchDetailMvpPresenter<V : MatchDetailMvpView, I : MatchDetailMvpInte
         homeBadge: String?,
         awayBadge: String?
     )
+
+    fun removeFromFav(matchDb: FavoriteMatchRepository, eventItem: EventsItem)
 }

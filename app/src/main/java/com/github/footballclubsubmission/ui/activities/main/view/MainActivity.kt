@@ -40,7 +40,7 @@ class MainActivity : BaseActivity(), HasSupportFragmentInjector {
         main_bottom_navigation.selectedItemId = prev_match
     }
 
-    private fun settingFragment(@IdRes layoutId: Int, fragment: Fragment, simpleNameTag: String) =
+    fun settingFragment(@IdRes layoutId: Int, fragment: Fragment, simpleNameTag: String) =
         supportFragmentManager.beginTransaction().replace(layoutId, fragment, simpleNameTag).commit()
 
     private fun setPrevMatchFragment(savedInstanceState: Bundle?) {
