@@ -1,5 +1,10 @@
 package com.github.footballclubsubmission.ui.fragments.matchlist.view
 
+import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.action.ViewActions.click
+import android.support.test.espresso.assertion.ViewAssertions.matches
+import android.support.test.espresso.base.IdlingResourceRegistry
+import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import com.github.footballclubsubmission.R
@@ -28,6 +33,7 @@ class MatchListFragmentTest {
         mActivity.activity.settingFragment(R.id.main_fragment_container,
             MatchListFragment.newInstance(MatchListFragment.DISPLAY_MODE_LAST_MATCH),
             MatchListFragment.getSimpleName(mActivity.activity, MatchListFragment.DISPLAY_MODE_LAST_MATCH))
+
     }
 
     @After
@@ -35,8 +41,11 @@ class MatchListFragmentTest {
     }
 
     @Test
-    fun RecyclerViewCheckScrollClick() {
-        
+    fun recyclerViewCheckScrollClick() {
+        onView(withId(R.id.match_list_rv_match)).check(matches(isDisplayed()))
+        Thread.sleep(5000)
+        onView(withText("Man City")).check(matches(isDisplayed()))
+        onView(withText("Man City")).perform(click())
     }
 
 }
