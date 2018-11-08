@@ -3,16 +3,20 @@ package com.github.footballclubsubmission.ui.fragments.matchlist.view
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.base.IdlingResourceRegistry
+import android.support.test.espresso.contrib.RecyclerViewActions
+import android.support.test.espresso.intent.Intents
+import android.support.test.espresso.intent.Intents.intended
+import android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import com.github.footballclubsubmission.R
 import com.github.footballclubsubmission.ui.activities.main.view.MainActivity
+import com.github.footballclubsubmission.ui.activities.matchdetail.view.MatchDetailActivity
+import com.github.footballclubsubmission.ui.adapters.MatchListAdapter
 import org.junit.After
 import org.junit.Before
 
-import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -30,22 +34,33 @@ class MatchListFragmentTest {
 
     @Before
     fun setUp() {
-        mActivity.activity.settingFragment(R.id.main_fragment_container,
-            MatchListFragment.newInstance(MatchListFragment.DISPLAY_MODE_LAST_MATCH),
-            MatchListFragment.getSimpleName(mActivity.activity, MatchListFragment.DISPLAY_MODE_LAST_MATCH))
-
+//        activityLoadLastMatches()
+        Intents.init()
     }
 
     @After
     fun tearDown() {
+        Intents.release()
     }
 
     @Test
-    fun recyclerViewCheckScrollClick() {
+    fun recyclerViewItemClickLastMatch() {
         onView(withId(R.id.match_list_rv_match)).check(matches(isDisplayed()))
         Thread.sleep(5000)
-        onView(withText("Man City")).check(matches(isDisplayed()))
-        onView(withText("Man City")).perform(click())
+        onView(withId(R.id.match_list_rv_match)).check(matches(isDisplayed()))
+        onView(withId(R.id.match_list_rv_match)).perform(RecyclerViewActions.actionOnItemAtPosition<MatchListAdapter.ViewHolder>(3, click()))
+        intended(hasComponent(MatchDetailActivity::class.java.name))
+    }
+
+    @Test
+    fun recyclerViewScrollItemClickNextMatch() {
+        onView(withText(R.string.next_match_simple_name)).check(matches(isDisplayed()))
+        onView(withText(R.string.next_match_simple_name)).perform(click())
+        Thread.sleep(5000)
+        onView(withId(R.id.match_list_rv_match)).check(matches(isDisplayed()))
+        onView(withId(R.id.match_list_rv_match)).perform(RecyclerViewActions.scrollToPosition<MatchListAdapter.ViewHolder>(8))
+        onView(withId(R.id.match_list_rv_match)).perform(RecyclerViewActions.actionOnItemAtPosition<MatchListAdapter.ViewHolder>(8, click()))
+        intended(hasComponent(MatchDetailActivity::class.java.name))
     }
 
 }

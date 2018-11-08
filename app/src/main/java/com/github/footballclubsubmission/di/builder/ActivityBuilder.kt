@@ -1,5 +1,6 @@
 package com.github.footballclubsubmission.di.builder
 
+import com.github.footballclubsubmission.ui.activities.main.MainModule
 import com.github.footballclubsubmission.ui.activities.main.view.MainActivity
 import com.github.footballclubsubmission.ui.activities.matchdetail.MatchDetailModule
 import com.github.footballclubsubmission.ui.activities.matchdetail.view.MatchDetailActivity
@@ -14,7 +15,7 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class ActivityBuilder {
 
-    @ContributesAndroidInjector(modules = [(MatchListFragmentProvider::class)])
+    @ContributesAndroidInjector(modules = [(MainModule::class),(MatchListFragmentProvider::class)])
     abstract fun bindMainActivity(): MainActivity
 
     @ContributesAndroidInjector(modules = [(MatchDetailModule::class)])

@@ -14,7 +14,6 @@ import com.github.footballclubsubmission.data.db.favoritematch.matchDb
 import com.github.footballclubsubmission.data.models.EventLeagueResponse
 import com.github.footballclubsubmission.data.models.EventsItem
 import com.github.footballclubsubmission.data.models.TeamResponse
-import com.github.footballclubsubmission.data.models.TeamsItem
 import com.github.footballclubsubmission.ui.activities.matchdetail.interactor.MatchDetailMvpInteractor
 import com.github.footballclubsubmission.ui.activities.matchdetail.presenter.MatchDetailMvpPresenter
 import com.github.footballclubsubmission.ui.base.view.BaseActivity
@@ -158,10 +157,12 @@ class MatchDetailActivity : BaseActivity(), MatchDetailMvpView {
 
     override fun displayHomeBadge(teamsItem: TeamResponse, isHomeBadge: Boolean) {
         if (isHomeBadge) {
-            Glide.with(this).load(teamsItem.teams[0].strTeamBadge).fitCenter().into(include_match_detail_score_img_home_club)
+            Glide.with(this).load(teamsItem.teams[0].strTeamBadge).fitCenter()
+                .into(include_match_detail_score_img_home_club)
             mHomeBadge = teamsItem.teams[0].strTeamBadge
         } else {
-            Glide.with(this).load(teamsItem.teams[0].strTeamBadge).fitCenter().into(include_match_detail_score_img_away_club)
+            Glide.with(this).load(teamsItem.teams[0].strTeamBadge).fitCenter()
+                .into(include_match_detail_score_img_away_club)
             mAwayBadge = teamsItem.teams[0].strTeamBadge
         }
     }
