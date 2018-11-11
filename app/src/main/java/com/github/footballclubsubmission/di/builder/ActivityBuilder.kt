@@ -4,6 +4,8 @@ import com.github.footballclubsubmission.ui.activities.main.MainModule
 import com.github.footballclubsubmission.ui.activities.main.view.MainActivity
 import com.github.footballclubsubmission.ui.activities.matchdetail.MatchDetailModule
 import com.github.footballclubsubmission.ui.activities.matchdetail.view.MatchDetailActivity
+import com.github.footballclubsubmission.ui.activities.teamdetail.TeamDetailModule
+import com.github.footballclubsubmission.ui.activities.teamdetail.view.TeamDetailActivity
 import com.github.footballclubsubmission.ui.fragments.matchlist.MatchListFragmentProvider
 import com.github.footballclubsubmission.ui.fragments.teams.TeamsFragmentProvider
 import dagger.Module
@@ -21,5 +23,8 @@ abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = [(MatchDetailModule::class)])
     abstract fun bindMatchDetailActivity(): MatchDetailActivity
+
+    @ContributesAndroidInjector(modules = [(TeamDetailModule::class)])
+    abstract fun bindTeamDetailActivity(): TeamDetailActivity
 
 }

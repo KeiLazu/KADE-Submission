@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
           package="com.github.footballclubsubmission">
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -24,8 +23,9 @@
         <activity
                 android:name=".ui.activities.matchdetail.view.MatchDetailActivity"
                 android:theme="@style/AppTheme.FullScreen"/>
-        <activity android:name=".ui.activities.teamdetail.view.TeamDetailActivity">
-        </activity>
+        <activity
+                android:name=".ui.activities.teamdetail.view.TeamDetailActivity"
+                android:theme="@style/AppTheme.FullScreen"/>
     </application>
 
 </manifest>
