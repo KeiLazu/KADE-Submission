@@ -6,11 +6,11 @@ import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.view.View
 import com.github.footballclubsubmission.R
-import com.github.footballclubsubmission.R.id.favorites
-import com.github.footballclubsubmission.R.id.matches
+import com.github.footballclubsubmission.R.id.*
 import com.github.footballclubsubmission.ui.adapters.MatchListPagerAdapter
 import com.github.footballclubsubmission.ui.base.view.BaseActivity
 import com.github.footballclubsubmission.ui.fragments.matchlist.view.MatchListFragment
+import com.github.footballclubsubmission.ui.fragments.teams.view.TeamsFragment
 import com.github.footballclubsubmission.utils.invisible
 import com.github.footballclubsubmission.utils.visible
 import dagger.android.AndroidInjector
@@ -57,6 +57,7 @@ class MainActivity : BaseActivity(), HasSupportFragmentInjector, TabLayout.OnTab
         main_bottom_navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 matches -> setPrevMatchFragment()
+                teams -> setTeamsFragment(savedInstanceState)
                 favorites -> setFavoriteFragment(savedInstanceState)
             }
             true
@@ -64,7 +65,7 @@ class MainActivity : BaseActivity(), HasSupportFragmentInjector, TabLayout.OnTab
         main_bottom_navigation.selectedItemId = matches
     }
 
-    fun settingFragment(@IdRes layoutId: Int, fragment: Fragment, simpleNameTag: String) =
+    private fun settingFragment(@IdRes layoutId: Int, fragment: Fragment, simpleNameTag: String) =
         supportFragmentManager.beginTransaction().replace(layoutId, fragment, simpleNameTag).commit()
 
     private fun setPrevMatchFragment() {
@@ -102,7 +103,11 @@ class MainActivity : BaseActivity(), HasSupportFragmentInjector, TabLayout.OnTab
     private fun setTeamsFragment(savedInstanceState: Bundle?) {
         checkVisibilityFragmentContainer(false)
         if (savedInstanceState == null) {
-            // TODO: create fragment for teams
+            settingFragment(
+                R.id.main_fragment_container,
+                TeamsFragment.getInstance(),
+                TeamsFragment::class.java.simpleName
+            )
         }
     }
 

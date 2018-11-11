@@ -9,13 +9,15 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.github.footballclubsubmission.R
 import com.github.footballclubsubmission.data.db.favoritematch.FavoriteMatchModel
 import com.github.footballclubsubmission.data.db.favoritematch.matchDb
 import com.github.footballclubsubmission.data.models.EventLeagueResponse
 import com.github.footballclubsubmission.ui.activities.matchdetail.view.MatchDetailActivity
 import com.github.footballclubsubmission.ui.adapters.FavoriteListAdapter
-import com.github.footballclubsubmission.ui.adapters.MatchListAdapter
+import com.github.footballclubsubmission.ui.adapters.LastMatchListAdapter
+import com.github.footballclubsubmission.ui.adapters.NextMatchListAdapter
 import com.github.footballclubsubmission.ui.base.view.BaseFragment
 import com.github.footballclubsubmission.ui.fragments.matchlist.interactor.MatchListMvpInteractor
 import com.github.footballclubsubmission.ui.fragments.matchlist.presenter.MatchListMvpPresenter
@@ -29,16 +31,19 @@ import javax.inject.Inject
  * A simple [Fragment] subclass.
  *
  */
-class MatchListFragment : BaseFragment(), MatchListMvpView, MatchListAdapter.OpenMatchDetailActivity {
+class MatchListFragment : BaseFragment(), MatchListMvpView, LastMatchListAdapter.OpenLastMatchDetailActivity,
+    NextMatchListAdapter.NextMatchListCallback {
 
     @Inject
     internal lateinit var presenter: MatchListMvpPresenter<MatchListMvpView, MatchListMvpInteractor>
     @Inject
     internal lateinit var mLayoutManager: LinearLayoutManager
     @Inject
-    internal lateinit var mMatchListAdapter: MatchListAdapter
+    internal lateinit var mLastMatchListAdapter: LastMatchListAdapter
     @Inject
     internal lateinit var mFavoriteListAdapter: FavoriteListAdapter
+    @Inject
+    internal lateinit var mNextMatchListAdapter: NextMatchListAdapter
 
     companion object {
         const val DISPLAY_MODE_NEXT_MATCH: Int = 1
@@ -89,10 +94,16 @@ class MatchListFragment : BaseFragment(), MatchListMvpView, MatchListAdapter.Ope
     private fun configMatchList(displayMode: Int) {
         mLayoutManager.orientation = LinearLayoutManager.VERTICAL
         match_list_rv_match.apply {
-            layoutManager = mLayoutManager; itemAnimator = DefaultItemAnimator(); adapter =
-                if (displayMode != DISPLAY_MODE_FAV) mMatchListAdapter else mFavoriteListAdapter
+            layoutManager = mLayoutManager; itemAnimator = DefaultItemAnimator()
+            adapter = when (displayMode) {
+                DISPLAY_MODE_FAV -> mFavoriteListAdapter
+                DISPLAY_MODE_LAST_MATCH -> mLastMatchListAdapter
+                DISPLAY_MODE_NEXT_MATCH -> mNextMatchListAdapter
+                else -> null
+            }
         }
-        mMatchListAdapter.setMatchListInterface(this)
+        mLastMatchListAdapter.setMatchListInterface(this)
+        mNextMatchListAdapter.mNextMatchListCallback = this
         presenter.onViewPrepared(displayMode, getBaseActivity()?.matchDb)
         match_list_srl.setOnRefreshListener {
             presenter.onViewPrepared(
@@ -102,12 +113,25 @@ class MatchListFragment : BaseFragment(), MatchListMvpView, MatchListAdapter.Ope
         }
     }
 
-    override fun openMatchDetailActivity(eventId: Int) {
+    override fun openLastMatchDetailActivity(eventId: Int) {
         getBaseActivity()?.applicationContext?.startActivity<MatchDetailActivity>(MatchDetailActivity.BUNDLE_KEY_EVENT_ID to eventId)
     }
 
-    override fun putDataMatchList(eventLeagueResponse: EventLeagueResponse) {
-        mMatchListAdapter.addMatchList(eventLeagueResponse.events)
+    override fun openCalendarForNotification() {
+        Toast.makeText(context, "Open Calendar", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun openNextMatchDetailActivity(eventId: Int?) {
+        getBaseActivity()?.applicationContext?.startActivity<MatchDetailActivity>(MatchDetailActivity.BUNDLE_KEY_EVENT_ID to (eventId ?: 0))
+    }
+
+    override fun putLastMatchData(eventLeagueResponse: EventLeagueResponse) {
+        mLastMatchListAdapter.addMatchList(eventLeagueResponse.events)
+        match_list_srl.isRefreshing = false
+    }
+
+    override fun putNextMatchData(eventLeagueResponse: EventLeagueResponse) {
+        mNextMatchListAdapter.addAllData(eventLeagueResponse)
         match_list_srl.isRefreshing = false
     }
 

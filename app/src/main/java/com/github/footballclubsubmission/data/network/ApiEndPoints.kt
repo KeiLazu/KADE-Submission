@@ -49,9 +49,10 @@ object ApiEndPoints {
             .toString()
     }
 
-    fun getAllLeaguesUrl(): String {
+    fun getAllLeaguesTeamsUrl(leagueName: String): String {
         return getBaseTheSportsDbUrl()
-            .appendPath("all_leagues.php")
+            .appendPath("search_all_teams.php")
+            .appendQueryParameter("l", leagueName)
             .build().toString()
     }
 

@@ -6,7 +6,6 @@ import com.github.footballclubsubmission.ui.base.presenter.BasePresenter
 import com.github.footballclubsubmission.ui.fragments.matchlist.interactor.MatchListMvpInteractor
 import com.github.footballclubsubmission.ui.fragments.matchlist.view.MatchListFragment
 import com.github.footballclubsubmission.ui.fragments.matchlist.view.MatchListMvpView
-import com.github.footballclubsubmission.utils.AppSchedulerProvider
 import com.github.footballclubsubmission.utils.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
 import org.jetbrains.anko.db.classParser
@@ -43,7 +42,7 @@ class MatchListPresenter<V : MatchListMvpView, I : MatchListMvpInteractor>
                 .subscribe { EventLeagueResponse ->
                     getView()?.let {
                         it.hideProgress()
-                        it.putDataMatchList(EventLeagueResponse)
+                        it.putLastMatchData(EventLeagueResponse)
                     }
                 }
         }
@@ -56,7 +55,7 @@ class MatchListPresenter<V : MatchListMvpView, I : MatchListMvpInteractor>
                 .subscribe { EventLeagueResponse ->
                     getView()?.let {
                         it.hideProgress()
-                        it.putDataMatchList(EventLeagueResponse)
+                        it.putNextMatchData(EventLeagueResponse)
                     }
                 }
         }

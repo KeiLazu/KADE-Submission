@@ -15,13 +15,13 @@ import kotlinx.android.synthetic.main.list_item_match_list.view.*
  *  Created by Kei Lazu (Kennix Lazuardi) on 10/20/2018
  *  check https://github.com/KeiLazu for more
  */
-class MatchListAdapter(private val response: EventLeagueResponse) :
-    RecyclerView.Adapter<MatchListAdapter.ViewHolder>() {
+class LastMatchListAdapter(private val response: EventLeagueResponse) :
+    RecyclerView.Adapter<LastMatchListAdapter.LastMatchViewHolder>() {
 
-    lateinit var openMatchDetailActivity: OpenMatchDetailActivity
+    lateinit var openLastMatchDetailActivity: OpenLastMatchDetailActivity
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LastMatchViewHolder =
+        LastMatchViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.list_item_match_list, parent, false
             )
@@ -29,9 +29,11 @@ class MatchListAdapter(private val response: EventLeagueResponse) :
 
     override fun getItemCount(): Int = this.response.events.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.let {
-        it.clear()
-        it.bind(position)
+    override fun onBindViewHolder(holderLastMatch: LastMatchViewHolder, position: Int) {
+        holderLastMatch.let {
+            it.clear()
+            it.bind(position)
+        }
     }
 
     internal fun addMatchList(eventsItems: MutableList<EventsItem>) {
@@ -39,11 +41,11 @@ class MatchListAdapter(private val response: EventLeagueResponse) :
         notifyDataSetChanged()
     }
 
-    internal fun setMatchListInterface(openMatchDetailActivity: OpenMatchDetailActivity) {
-        this.openMatchDetailActivity = openMatchDetailActivity
+    internal fun setMatchListInterface(openLastMatchDetailActivity: OpenLastMatchDetailActivity) {
+        this.openLastMatchDetailActivity = openLastMatchDetailActivity
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class LastMatchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun clear() {
             itemView.list_item_match_list_date_time.text = ""
@@ -70,7 +72,7 @@ class MatchListAdapter(private val response: EventLeagueResponse) :
 
         private fun setItemClickListener(position: Int) {
             itemView.setOnClickListener {
-                openMatchDetailActivity.openMatchDetailActivity(getIndividualData(position)?.idEvent ?: 0)
+                openLastMatchDetailActivity.openLastMatchDetailActivity(getIndividualData(position)?.idEvent ?: 0)
             }
         }
 
@@ -93,8 +95,8 @@ class MatchListAdapter(private val response: EventLeagueResponse) :
 
     }
 
-    interface OpenMatchDetailActivity {
-        fun openMatchDetailActivity(eventId: Int)
+    interface OpenLastMatchDetailActivity {
+        fun openLastMatchDetailActivity(eventId: Int)
     }
 
 }

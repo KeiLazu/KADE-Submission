@@ -1,7 +1,9 @@
 package com.github.footballclubsubmission.ui.fragments.teams.interactor
 
+import com.github.footballclubsubmission.data.models.TeamResponse
 import com.github.footballclubsubmission.data.network.ApiHelper
 import com.github.footballclubsubmission.ui.base.interactor.BaseInteractor
+import io.reactivex.Observable
 import javax.inject.Inject
 
 /**
@@ -10,4 +12,5 @@ import javax.inject.Inject
  */
 class TeamsInteractor @Inject internal constructor(apiHelper: ApiHelper) : BaseInteractor(apiHelper), TeamsMvpInteractor {
 
+    override fun getTeamsData(leagueName: String): Observable<TeamResponse> = apiHelper.getTeamLeagueApi(leagueName)
 }

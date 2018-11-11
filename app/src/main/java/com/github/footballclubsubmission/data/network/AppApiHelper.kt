@@ -31,4 +31,8 @@ class AppApiHelper @Inject constructor() : ApiHelper {
         Rx2AndroidNetworking.get(ApiEndPoints.getTeamBadgeUrl(teamId))
             .build()
             .getObjectObservable(TeamResponse::class.java)
+
+    override fun getTeamLeagueApi(leagueName: String): Observable<TeamResponse> =
+        Rx2AndroidNetworking.get(ApiEndPoints.getAllLeaguesTeamsUrl(leagueName))
+            .build().getObjectObservable(TeamResponse::class.java)
 }

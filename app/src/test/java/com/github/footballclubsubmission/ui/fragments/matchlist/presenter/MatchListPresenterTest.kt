@@ -1,7 +1,5 @@
 package com.github.footballclubsubmission.ui.fragments.matchlist.presenter
 
-import com.github.footballclubsubmission.data.db.favoritematch.FavoriteMatchModel
-import com.github.footballclubsubmission.data.db.favoritematch.FavoriteMatchRepository
 import com.github.footballclubsubmission.data.models.EventLeagueResponse
 import com.github.footballclubsubmission.ui.fragments.matchlist.interactor.MatchListMvpInteractor
 import com.github.footballclubsubmission.ui.fragments.matchlist.view.MatchListMvpView
@@ -48,7 +46,7 @@ class MatchListPresenterTest {
 
         presenter.getLastMatchApi()
 
-        verify(mView).putDataMatchList(eventLeagueResponseMocked)
+        verify(mView).putLastMatchData(eventLeagueResponseMocked)
         verify(mView).hideProgress()
     }
 
@@ -62,7 +60,7 @@ class MatchListPresenterTest {
 
         presenter.getNextMatchApi()
 
-        verify(mView).putDataMatchList(eventLeagueResponseMocked)
+        verify(mView).putLastMatchData(eventLeagueResponseMocked)
         verify(mView).hideProgress()
     }
 

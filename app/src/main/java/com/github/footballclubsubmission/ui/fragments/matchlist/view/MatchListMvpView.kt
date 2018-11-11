@@ -10,7 +10,8 @@ import com.github.footballclubsubmission.ui.base.view.MvpView
  */
 interface MatchListMvpView : MvpView {
 
-    fun putDataMatchList(eventLeagueResponse: EventLeagueResponse)
+    fun putLastMatchData(eventLeagueResponse: EventLeagueResponse)
+    fun putNextMatchData(eventLeagueResponse: EventLeagueResponse)
     fun putFavData(result: List<FavoriteMatchModel>)
 
 }

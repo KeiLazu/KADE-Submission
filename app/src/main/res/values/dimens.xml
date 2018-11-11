@@ -21,4 +21,7 @@
     <dimen name="text_width_club_name">100dp</dimen>
     <dimen name="separator_height">4dp</dimen>
     <dimen name="margin_tb_sp_parent_any_teams">10dp</dimen>
+    <dimen name="padding_all_parent_list_item_team">10dp</dimen>
+    <dimen name="img_generic_badge_size">50dp</dimen>
+    <dimen name="img_generic_badge_size_glide">50</dimen>
 </resources>

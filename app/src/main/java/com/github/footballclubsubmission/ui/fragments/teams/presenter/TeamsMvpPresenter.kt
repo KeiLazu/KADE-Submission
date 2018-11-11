@@ -9,4 +9,7 @@ import com.github.footballclubsubmission.ui.fragments.teams.view.TeamsMvpView
  *  check https://github.com/KeiLazu for more
  */
 interface TeamsMvpPresenter<V: TeamsMvpView, I: TeamsMvpInteractor> : MvpPresenter<V,I> {
+
+    fun getTeamLeaguesData(leagueName: String)
+
 }

@@ -14,4 +14,5 @@ interface ApiHelper {
     fun getNextMatchApi(): Observable<EventLeagueResponse>
     fun getEventDetailApi(eventId: Int): Observable<EventLeagueResponse>
     fun getTeamBadgeApi(teamId: Int): Observable<TeamResponse>
+    fun getTeamLeagueApi(leagueName: String): Observable<TeamResponse>
 }

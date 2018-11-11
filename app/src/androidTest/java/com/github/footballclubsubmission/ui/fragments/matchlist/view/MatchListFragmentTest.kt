@@ -13,7 +13,7 @@ import android.support.test.runner.AndroidJUnit4
 import com.github.footballclubsubmission.R
 import com.github.footballclubsubmission.ui.activities.main.view.MainActivity
 import com.github.footballclubsubmission.ui.activities.matchdetail.view.MatchDetailActivity
-import com.github.footballclubsubmission.ui.adapters.MatchListAdapter
+import com.github.footballclubsubmission.ui.adapters.LastMatchListAdapter
 import org.junit.After
 import org.junit.Before
 
@@ -48,7 +48,7 @@ class MatchListFragmentTest {
         onView(withId(R.id.match_list_rv_match)).check(matches(isDisplayed()))
         Thread.sleep(5000)
         onView(withId(R.id.match_list_rv_match)).check(matches(isDisplayed()))
-        onView(withId(R.id.match_list_rv_match)).perform(RecyclerViewActions.actionOnItemAtPosition<MatchListAdapter.ViewHolder>(3, click()))
+        onView(withId(R.id.match_list_rv_match)).perform(RecyclerViewActions.actionOnItemAtPosition<LastMatchListAdapter.LastMatchViewHolder>(3, click()))
         intended(hasComponent(MatchDetailActivity::class.java.name))
     }
 
@@ -58,8 +58,8 @@ class MatchListFragmentTest {
         onView(withText(R.string.next_match_simple_name)).perform(click())
         Thread.sleep(5000)
         onView(withId(R.id.match_list_rv_match)).check(matches(isDisplayed()))
-        onView(withId(R.id.match_list_rv_match)).perform(RecyclerViewActions.scrollToPosition<MatchListAdapter.ViewHolder>(8))
-        onView(withId(R.id.match_list_rv_match)).perform(RecyclerViewActions.actionOnItemAtPosition<MatchListAdapter.ViewHolder>(8, click()))
+        onView(withId(R.id.match_list_rv_match)).perform(RecyclerViewActions.scrollToPosition<LastMatchListAdapter.LastMatchViewHolder>(8))
+        onView(withId(R.id.match_list_rv_match)).perform(RecyclerViewActions.actionOnItemAtPosition<LastMatchListAdapter.LastMatchViewHolder>(8, click()))
         intended(hasComponent(MatchDetailActivity::class.java.name))
     }
 

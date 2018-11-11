@@ -8,5 +8,11 @@ data class TeamsItem(
     var idTeam: String? = null,
 
     @field:SerializedName("strTeamBadge")
-    var strTeamBadge: String? = null
+    var strTeamBadge: String? = null,
+
+    @field:SerializedName("strTeam")
+    var strTeam: String? = null,
+
+    @field:SerializedName("strDescriptionEN")
+    var strDescriptionEN: String? = null
 )
