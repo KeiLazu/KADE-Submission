@@ -1,49 +1,49 @@
 <resources>
-    <string name="app_name">FootballClubSubmission</string>
-    <string name="desc_club_image">club image</string>
-    <string name="text_temp">(TEMP)</string>
-    <string name="club_name_null">None</string>
-    <string name="club_desc_null">No Detail</string>
+	<string name="app_name">FootballClubSubmission</string>
+	<string name="desc_club_image">club image</string>
+	<string name="text_temp">(TEMP)</string>
+	<string name="club_name_null">None</string>
+	<string name="club_desc_null">No Detail</string>
 
-    <string-array name="league">
-        <item>English Premier League</item>
-        <item>English League Championship</item>
-        <item>German Bundesliga</item>
-        <item>Italian Serie A</item>
-        <item>French Ligue 1</item>
-        <item>Spanish La Liga</item>
-    </string-array>
+	<string-array name="league">
+		<item>English Premier League</item>
+		<item>English League Championship</item>
+		<item>German Bundesliga</item>
+		<item>Italian Serie A</item>
+		<item>French Ligue 1</item>
+		<item>Spanish La Liga</item>
+	</string-array>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_last_match">LAST MATCH</string>
-    <string name="title_next_match">NEXT MATCH</string>
-    <string name="text_versus">vs</string>
-    <string name="base_score">0</string>
-    <string name="text_shots">Shots</string>
-    <string name="text_goals">Goals</string>
-    <string name="text_lineups">Lineups</string>
-    <string name="text_goalkeeper">Goal Keepers</string>
-    <string name="text_defense">Defense</string>
-    <string name="text_midfield">Midfield</string>
-    <string name="text_forward">Forward</string>
-    <string name="text_substitutes">Substitutes</string>
-    <string name="text_title_match_detail">Match Detail</string>
-    <string name="prev_match_bnm">Prev match</string>
-    <string name="next_match_bnm">Next match</string>
-    <string name="favorites_bnm">Favorites</string>
-    <string name="last_match_simple_name">Last Match</string>
-    <string name="next_match_simple_name">Next Match</string>
-    <string name="text_example">Example</string>
-    <string name="text_zero">0</string>
-    <string name="text_generic_error">Something is wrong</string>
-    <string name="text_success_add_to_fav">Added to favorites</string>
-    <string name="favorites_simple_name">Favorites</string>
-    <string name="text_success_remove_from_fav">Removed from favorites</string>
-    <string name="text_matches_bnm">Matches</string>
-    <string name="text_teams_bnm">Teams</string>
-    <string name="img_badge">team badge</string>
-    <string name="icon_notification">icon notification</string>
-    <string name="dummy_lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+	<string name="hello_blank_fragment">Hello blank fragment</string>
+	<string name="title_last_match">LAST MATCH</string>
+	<string name="title_next_match">NEXT MATCH</string>
+	<string name="text_versus">vs</string>
+	<string name="base_score">0</string>
+	<string name="text_shots">Shots</string>
+	<string name="text_goals">Goals</string>
+	<string name="text_lineups">Lineups</string>
+	<string name="text_goalkeeper">Goal Keepers</string>
+	<string name="text_defense">Defense</string>
+	<string name="text_midfield">Midfield</string>
+	<string name="text_forward">Forward</string>
+	<string name="text_substitutes">Substitutes</string>
+	<string name="text_title_match_detail">Match Detail</string>
+	<string name="prev_match_bnm">Prev match</string>
+	<string name="next_match_bnm">Next match</string>
+	<string name="favorites_bnm">Favorites</string>
+	<string name="last_match_simple_name">Last Match</string>
+	<string name="next_match_simple_name">Next Match</string>
+	<string name="text_example">Example</string>
+	<string name="text_zero">0</string>
+	<string name="text_generic_error">Something is wrong</string>
+	<string name="text_success_add_to_fav">Added to favorites</string>
+	<string name="favorites_simple_name">Favorites</string>
+	<string name="text_success_remove_from_fav">Removed from favorites</string>
+	<string name="text_matches_bnm">Matches</string>
+	<string name="text_teams_bnm">Teams</string>
+	<string name="img_badge">team badge</string>
+	<string name="icon_notification">icon notification</string>
+	<string name="dummy_lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
         ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
         aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
         fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
@@ -55,4 +55,6 @@
         exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure
         reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
     </string>
+	<string name="text_overview_team">Overview</string>
+	<string name="text_player_detail">Player</string>
 </resources>

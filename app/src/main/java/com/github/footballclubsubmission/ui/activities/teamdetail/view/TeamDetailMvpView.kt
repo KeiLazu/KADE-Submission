@@ -1,5 +1,6 @@
 package com.github.footballclubsubmission.ui.activities.teamdetail.view
 
+import com.github.footballclubsubmission.data.models.TeamResponse
 import com.github.footballclubsubmission.ui.base.view.MvpView
 
 /**
@@ -7,4 +8,5 @@ import com.github.footballclubsubmission.ui.base.view.MvpView
  *  check https://github.com/KeiLazu for more
  */
 interface TeamDetailMvpView : MvpView {
+    fun displayTeamData(teamResponse: TeamResponse)
 }

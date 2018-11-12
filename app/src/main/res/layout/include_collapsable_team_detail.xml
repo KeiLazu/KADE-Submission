@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  Created by Kei Lazu (Kennix Lazuardi)
+  check https://github.com/KeiLazu for more
+-->
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content">
+
+	<android.support.v7.widget.Toolbar
+		android:layout_width="match_parent"
+		android:layout_height="?attr/actionBarSize"
+		android:id="@+id/include_collapsable_team_detail_toolbar"
+		/>
+
+	<ImageView
+		android:id="@+id/include_collapsable_team_detail_img_badge"
+		android:layout_width="@dimen/img_badge_size_collapsable_team_info"
+		android:layout_height="@dimen/img_badge_size_collapsable_team_info"
+		android:layout_marginTop="@dimen/margin_top_img_parent_team_info"
+		android:layout_marginBottom="@dimen/margin_top_img_parent_team_info"
+		android:contentDescription="@string/img_badge"
+		android:src="@drawable/ic_launcher_background"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.1"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/include_collapsable_team_detail_toolbar" />
+
+	<TextView
+		android:id="@+id/include_collapsable_team_detail_tv_team_name"
+		android:layout_width="@dimen/zero"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/margin_se_tv_any_collapsable_team_info"
+		android:layout_marginEnd="@dimen/margin_se_tv_any_collapsable_team_info"
+		android:gravity="center"
+		app:layout_constraintBottom_toTopOf="@id/include_collapsable_team_detail_tv_year"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toEndOf="@id/include_collapsable_team_detail_img_badge"
+		app:layout_constraintTop_toBottomOf="@id/include_collapsable_team_detail_toolbar"
+		app:layout_constraintVertical_chainStyle="packed" />
+
+	<TextView
+		android:id="@+id/include_collapsable_team_detail_tv_year"
+		android:layout_width="@dimen/zero"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/margin_se_tv_any_collapsable_team_info"
+		android:layout_marginTop="@dimen/margin_top_tv_tv_collapsable_info"
+		android:layout_marginEnd="@dimen/margin_se_tv_any_collapsable_team_info"
+		app:layout_constraintBottom_toTopOf="@id/include_collapsable_team_detail_tv_manager"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toEndOf="@id/include_collapsable_team_detail_img_badge"
+		app:layout_constraintTop_toBottomOf="@id/include_collapsable_team_detail_tv_team_name" />
+
+	<TextView
+		android:id="@+id/include_collapsable_team_detail_tv_manager"
+		android:layout_width="@dimen/zero"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/margin_se_tv_any_collapsable_team_info"
+		android:layout_marginTop="@dimen/margin_top_tv_tv_collapsable_info"
+		android:layout_marginEnd="@dimen/margin_se_tv_any_collapsable_team_info"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toEndOf="@id/include_collapsable_team_detail_img_badge"
+		app:layout_constraintTop_toBottomOf="@id/include_collapsable_team_detail_tv_year" />
+
+</android.support.constraint.ConstraintLayout>

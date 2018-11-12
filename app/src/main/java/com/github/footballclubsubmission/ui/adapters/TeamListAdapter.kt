@@ -1,6 +1,5 @@
 package com.github.footballclubsubmission.ui.adapters
 
-import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -36,7 +35,7 @@ class TeamListAdapter(private val response: TeamResponse) : RecyclerView.Adapter
         holder.bind(response.teams[position])
     }
 
-    class ViewHolder(view: View?) : RecyclerView.ViewHolder(view), View.OnClickListener {
+    class ViewHolder(view: View?) : RecyclerView.ViewHolder(view) {
 
         fun clear() {
             itemView.list_item_team_tv_team_name.text = ""
@@ -51,13 +50,11 @@ class TeamListAdapter(private val response: TeamResponse) : RecyclerView.Adapter
                     .into(it)
             }
             itemView.list_item_team_tv_team_name.text = teamsItem.strTeam
-            itemView.setOnClickListener(this)
+            itemView.setOnClickListener { itemViewClicked(teamsItem.idTeam?.toInt() ?: 0) }
         }
 
-        override fun onClick(v: View?) {
-            val intent = Intent(itemView.context, TeamDetailActivity::class.java)
-            itemView.context.startActivity(intent)
-        }
+        private fun itemViewClicked(teamId: Int?) =
+            itemView.context.startActivity(TeamDetailActivity.newInstance(itemView.context, teamId))
     }
 
 }

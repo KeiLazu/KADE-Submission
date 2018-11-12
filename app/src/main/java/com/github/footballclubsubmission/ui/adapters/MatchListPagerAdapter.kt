@@ -16,12 +16,11 @@ class MatchListPagerAdapter @Inject internal constructor(fragmentManager: Fragme
 
     private var tabCount = 0
 
-    override fun getItem(position: Int): Fragment? {
-        return when (position) {
+    override fun getItem(position: Int): Fragment? =
+        when (position) {
             0 -> MatchListFragment.newInstance(MatchListFragment.DISPLAY_MODE_LAST_MATCH)
             1 -> MatchListFragment.newInstance(MatchListFragment.DISPLAY_MODE_NEXT_MATCH)
             else -> null
-        }
     }
 
     override fun getCount(): Int = tabCount

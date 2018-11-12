@@ -24,4 +24,8 @@
     <dimen name="padding_all_parent_list_item_team">10dp</dimen>
     <dimen name="img_generic_badge_size">50dp</dimen>
     <dimen name="img_generic_badge_size_glide">50</dimen>
+    <dimen name="img_badge_size_collapsable_team_info">100dp</dimen>
+    <dimen name="margin_top_img_parent_team_info">25dp</dimen>
+    <dimen name="margin_se_tv_any_collapsable_team_info">15dp</dimen>
+    <dimen name="margin_top_tv_tv_collapsable_info">8dp</dimen>
 </resources>
