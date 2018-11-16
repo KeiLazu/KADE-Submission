@@ -51,4 +51,11 @@
         <item name="android:layout_marginStart">@dimen/generic_margin_top</item>
     </style>
 
+    <style name="TextAppearanceCollapsable">
+        <item name="android:layout_marginStart">@dimen/margin_se_tv_any_collapsable_team_info</item>
+        <item name="android:layout_marginEnd">@dimen/margin_se_tv_any_collapsable_team_info</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
 </resources>

@@ -1,7 +1,9 @@
 package com.github.footballclubsubmission.ui.activities.teamdetail.interactor
 
+import com.github.footballclubsubmission.data.models.TeamResponse
 import com.github.footballclubsubmission.data.network.ApiHelper
 import com.github.footballclubsubmission.ui.base.interactor.BaseInteractor
+import io.reactivex.Observable
 import javax.inject.Inject
 
 /**
@@ -9,4 +11,7 @@ import javax.inject.Inject
  *  check https://github.com/KeiLazu for more
  */
 class TeamDetailInteractor @Inject internal constructor(apiHelper: ApiHelper) : BaseInteractor(apiHelper), TeamDetailMvpInteractor {
+
+    override fun getTeamDetailData(teamId: Int): Observable<TeamResponse> = apiHelper.getTeamBadgeApi(teamId)
+
 }

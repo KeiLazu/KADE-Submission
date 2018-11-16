@@ -28,4 +28,9 @@
     <dimen name="margin_top_img_parent_team_info">25dp</dimen>
     <dimen name="margin_se_tv_any_collapsable_team_info">15dp</dimen>
     <dimen name="margin_top_tv_tv_collapsable_info">8dp</dimen>
+	<dimen name="text_size_big">24sp</dimen>
+	<dimen name="height_img_stadium_team_description">100dp</dimen>
+	<dimen name="generic_padding_list_item_player">16dp</dimen>
+	<dimen name="img_size_fanart">200dp</dimen>
+	<dimen name="text_size_medium">20sp</dimen>
 </resources>

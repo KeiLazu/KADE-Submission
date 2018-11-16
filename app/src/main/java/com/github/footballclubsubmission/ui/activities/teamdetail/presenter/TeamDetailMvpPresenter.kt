@@ -9,4 +9,5 @@ import com.github.footballclubsubmission.ui.base.presenter.MvpPresenter
  *  check https://github.com/KeiLazu for more
  */
 interface TeamDetailMvpPresenter<V: TeamDetailMvpView, I: TeamDetailMvpInteractor> : MvpPresenter<V,I> {
+    fun getTeamDetailData(teamId: Int)
 }

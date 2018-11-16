@@ -1,6 +1,7 @@
 package com.github.footballclubsubmission.data.network
 
 import com.github.footballclubsubmission.data.models.EventLeagueResponse
+import com.github.footballclubsubmission.data.models.PlayerListResponse
 import com.github.footballclubsubmission.data.models.TeamResponse
 import com.rx2androidnetworking.Rx2AndroidNetworking
 import io.reactivex.Observable
@@ -35,4 +36,8 @@ class AppApiHelper @Inject constructor() : ApiHelper {
     override fun getTeamLeagueApi(leagueName: String): Observable<TeamResponse> =
         Rx2AndroidNetworking.get(ApiEndPoints.getAllLeaguesTeamsUrl(leagueName))
             .build().getObjectObservable(TeamResponse::class.java)
+
+    override fun getPlayerListTeamApi(teamId: Int): Observable<PlayerListResponse> =
+            Rx2AndroidNetworking.get(ApiEndPoints.getPlayerListTeamUrl(teamId))
+                .build().getObjectObservable(PlayerListResponse::class.java)
 }

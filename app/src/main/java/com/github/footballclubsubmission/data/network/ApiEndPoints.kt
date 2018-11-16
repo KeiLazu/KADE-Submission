@@ -56,4 +56,11 @@ object ApiEndPoints {
             .build().toString()
     }
 
+    fun getPlayerListTeamUrl(teamId: Int): String {
+        return getBaseTheSportsDbUrl()
+            .appendPath("lookup_all_players.php")
+            .appendQueryParameter("id", teamId.toString())
+            .build().toString()
+    }
+
 }

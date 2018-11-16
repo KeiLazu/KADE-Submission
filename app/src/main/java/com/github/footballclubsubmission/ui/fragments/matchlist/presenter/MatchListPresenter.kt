@@ -1,7 +1,9 @@
 package com.github.footballclubsubmission.ui.fragments.matchlist.presenter
 
+import android.util.Log
 import com.github.footballclubsubmission.data.db.favoritematch.FavoriteMatchModel
 import com.github.footballclubsubmission.data.db.favoritematch.FavoriteMatchRepository
+import com.github.footballclubsubmission.ui.activities.matchdetail.presenter.MatchDetailPresenter
 import com.github.footballclubsubmission.ui.base.presenter.BasePresenter
 import com.github.footballclubsubmission.ui.fragments.matchlist.interactor.MatchListMvpInteractor
 import com.github.footballclubsubmission.ui.fragments.matchlist.view.MatchListFragment
@@ -39,12 +41,14 @@ class MatchListPresenter<V : MatchListMvpView, I : MatchListMvpInteractor>
         interactor?.let { it ->
             it.getLastMatchApi()
                 .compose(schedulerProvider.ioToMainObservableScheduler())
-                .subscribe { EventLeagueResponse ->
+                .subscribe ({ EventLeagueResponse ->
                     getView()?.let {
                         it.hideProgress()
                         it.putLastMatchData(EventLeagueResponse)
                     }
-                }
+                }, { throwable ->
+                    Log.i(MatchListPresenter::class.java.simpleName, "ERROR:\n$throwable")
+                })
         }
     }
 
@@ -52,12 +56,14 @@ class MatchListPresenter<V : MatchListMvpView, I : MatchListMvpInteractor>
         interactor?.let { it ->
             it.getNextMatchApi()
                 .compose(schedulerProvider.ioToMainObservableScheduler())
-                .subscribe { EventLeagueResponse ->
+                .subscribe ({ EventLeagueResponse ->
                     getView()?.let {
                         it.hideProgress()
                         it.putNextMatchData(EventLeagueResponse)
                     }
-                }
+                },{ throwable ->
+                    Log.i(MatchListPresenter::class.java.simpleName, "ERROR:\n$throwable")
+                })
         }
     }
 

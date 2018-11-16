@@ -10,4 +10,5 @@ import com.github.footballclubsubmission.ui.fragments.teamplayer.view.TeamPlayer
  */
 interface TeamPlayerMvpPresenter<V : TeamPlayerMvpView, I : TeamPlayerMvpInteractor> : MvpPresenter<V, I> {
 
+    fun getPlayerListData(teamId: Int)
 }

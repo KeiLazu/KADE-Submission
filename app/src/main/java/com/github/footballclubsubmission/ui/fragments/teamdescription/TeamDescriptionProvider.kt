@@ -11,7 +11,7 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class TeamDescriptionProvider {
 
-    @ContributesAndroidInjector(modules = [(TeamDescriptionModule::class)])
+    @ContributesAndroidInjector
     internal abstract fun bindTeamDescriptionFragmentFactory(): TeamDescriptionFragment
 
 }

@@ -1,7 +1,9 @@
 package com.github.footballclubsubmission.ui.fragments.teamplayer.interactor
 
+import com.github.footballclubsubmission.data.models.PlayerListResponse
 import com.github.footballclubsubmission.data.network.ApiHelper
 import com.github.footballclubsubmission.ui.base.interactor.BaseInteractor
+import io.reactivex.Observable
 import javax.inject.Inject
 
 /**
@@ -9,4 +11,7 @@ import javax.inject.Inject
  *  check https://github.com/KeiLazu for more
  */
 class TeamPlayerInteractor @Inject internal constructor(apiHelper: ApiHelper) : BaseInteractor(apiHelper), TeamPlayerMvpInteractor {
+
+    override fun getPlayerListData(teamId: Int): Observable<PlayerListResponse> = apiHelper.getPlayerListTeamApi(teamId)
+
 }

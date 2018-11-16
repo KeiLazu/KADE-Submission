@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  Created by Kei Lazu (Kennix Lazuardi)
+  check https://github.com/KeiLazu for more
+-->
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:padding="@dimen/generic_padding_list_item_player">
+
+	<ImageView
+		android:id="@+id/list_item_player_img_cutoff"
+		android:layout_width="@dimen/height_img_stadium_team_description"
+		android:layout_height="@dimen/height_img_stadium_team_description"
+		android:contentDescription="@string/img_player_cutoff"
+		android:src="@drawable/ic_launcher_background"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
+
+	<TextView
+		android:id="@+id/list_item_player_tv_name"
+		android:layout_width="@dimen/zero"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/margin_se_tv_any_collapsable_team_info"
+		android:gravity="center"
+		android:textStyle="bold"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toEndOf="@id/list_item_player_img_cutoff"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintVertical_bias="0.2" />
+
+	<TextView
+		android:id="@+id/list_item_player_tv_position"
+		android:layout_width="@dimen/zero"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/margin_se_tv_any_collapsable_team_info"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		android:gravity="center"
+		app:layout_constraintStart_toEndOf="@id/list_item_player_img_cutoff"
+		app:layout_constraintTop_toBottomOf="@id/list_item_player_tv_name" />
+
+</android.support.constraint.ConstraintLayout>

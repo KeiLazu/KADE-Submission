@@ -14,4 +14,24 @@ import javax.inject.Inject
 class TeamPlayerPresenter<V : TeamPlayerMvpView, I : TeamPlayerMvpInteractor>
 @Inject internal constructor(interactor: I, schedulerProvider: SchedulerProvider, compositeDisposable: CompositeDisposable)
     : BasePresenter<V,I>(interactor, schedulerProvider, compositeDisposable), TeamPlayerMvpPresenter<V,I> {
+
+    override fun getPlayerListData(teamId: Int) {
+        getView()?.showProgress()
+        interactor?.let { it ->
+            it.getPlayerListData(teamId)
+                .compose(schedulerProvider.ioToMainObservableScheduler())
+                .subscribe({ playerListResponse ->
+                    getView()?.let { v ->
+                        v.hideProgress()
+                        v.putPlayerListData(playerListResponse)
+                    }
+                },{throwable ->
+                    getView()?.let {
+                        it.hideProgress()
+                        throwable.printStackTrace()
+                    }
+                })
+        }
+    }
+
 }

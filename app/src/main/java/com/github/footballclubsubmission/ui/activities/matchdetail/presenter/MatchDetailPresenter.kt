@@ -8,7 +8,6 @@ import com.github.footballclubsubmission.data.models.EventsItem
 import com.github.footballclubsubmission.ui.activities.matchdetail.interactor.MatchDetailMvpInteractor
 import com.github.footballclubsubmission.ui.activities.matchdetail.view.MatchDetailMvpView
 import com.github.footballclubsubmission.ui.base.presenter.BasePresenter
-import com.github.footballclubsubmission.utils.AppSchedulerProvider
 import com.github.footballclubsubmission.utils.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
 import org.jetbrains.anko.db.delete
@@ -31,13 +30,13 @@ class MatchDetailPresenter<V : MatchDetailMvpView, I : MatchDetailMvpInteractor>
         interactor?.let { it ->
             it.getEventDetailApi(eventId)
                 .compose(schedulerProvider.ioToMainObservableScheduler())
-                .subscribe ({ EventLeagueResponse ->
+                .subscribe({ EventLeagueResponse ->
                     getView()?.let {
                         it.hideProgress()
                         it.displayEventDetail(EventLeagueResponse)
                     }
                 }, { throwable ->
-//                    Log.i(MatchDetailPresenter::class.java.simpleName, "ERROR:\n$throwable")
+                    Log.i(MatchDetailPresenter::class.java.simpleName, "ERROR:\n$throwable")
                 })
         }
     }
@@ -46,12 +45,14 @@ class MatchDetailPresenter<V : MatchDetailMvpView, I : MatchDetailMvpInteractor>
         interactor?.let { it ->
             it.getTeamBadgeApi(teamId)
                 .compose(schedulerProvider.ioToMainObservableScheduler())
-                .subscribe { response ->
+                .subscribe({ response ->
                     getView()?.let {
                         if (isHomeBadge) it.displayHomeBadge(response, true)
                         else it.displayHomeBadge(response, false)
                     }
-                }
+                }, { throwable ->
+                    Log.i(MatchDetailPresenter::class.java.simpleName, "ERROR:\n$throwable")
+                })
         }
     }
 

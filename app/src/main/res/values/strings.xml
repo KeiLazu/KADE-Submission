@@ -57,4 +57,10 @@
     </string>
 	<string name="text_overview_team">Overview</string>
 	<string name="text_player_detail">Player</string>
+	<string name="image_stadium">image stadium</string>
+	<string name="dummy_stadium">Stadium</string>
+	<string name="img_player_cutoff">player cutoff image</string>
+	<string name="img_player_detail">image player detail fanart</string>
+	<string name="text_player_height">Height</string>
+	<string name="text_player_weight">Weight</string>
 </resources>

@@ -19,7 +19,7 @@ class TeamDetailPagerAdapter internal constructor(fragmentManager: FragmentManag
 
     override fun getItem(position: Int): Fragment? =
         when (position) {
-            0 -> teamsItem.let { TeamDescriptionFragment.newInstance(it.strStadium, it.strStadiumThumb, it.strStadiumDescription, it.strDescriptionEN) }
+            0 -> TeamDescriptionFragment.newInstance(teamsItem.strStadium, teamsItem.strStadiumThumb, teamsItem.strStadiumDescription, teamsItem.strDescriptionEN)
             1 -> TeamPlayerFragment.newInstance(teamsItem.idTeam?.toInt() ?: 0)
             else -> null
         }
