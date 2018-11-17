@@ -12,12 +12,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.github.footballclubsubmission.R
 import com.github.footballclubsubmission.data.db.favoritematch.FavoriteMatchModel
+import com.github.footballclubsubmission.data.db.favoritematch.FavoriteTeamModel
 import com.github.footballclubsubmission.data.db.favoritematch.matchDb
+import com.github.footballclubsubmission.data.db.favoritematch.teamDb
 import com.github.footballclubsubmission.data.models.EventLeagueResponse
+import com.github.footballclubsubmission.data.models.TeamResponse
 import com.github.footballclubsubmission.ui.activities.matchdetail.view.MatchDetailActivity
-import com.github.footballclubsubmission.ui.adapters.FavoriteListAdapter
-import com.github.footballclubsubmission.ui.adapters.LastMatchListAdapter
-import com.github.footballclubsubmission.ui.adapters.NextMatchListAdapter
+import com.github.footballclubsubmission.ui.adapters.*
 import com.github.footballclubsubmission.ui.base.view.BaseFragment
 import com.github.footballclubsubmission.ui.fragments.matchlist.interactor.MatchListMvpInteractor
 import com.github.footballclubsubmission.ui.fragments.matchlist.presenter.MatchListMvpPresenter
@@ -44,16 +45,19 @@ class MatchListFragment : BaseFragment(), MatchListMvpView, LastMatchListAdapter
     internal lateinit var mFavoriteListAdapter: FavoriteListAdapter
     @Inject
     internal lateinit var mNextMatchListAdapter: NextMatchListAdapter
+    @Inject
+    internal lateinit var mFavoriteTeamAdapter: FavoriteTeamAdapter
 
     companion object {
         const val DISPLAY_MODE_NEXT_MATCH: Int = 1
         const val DISPLAY_MODE_LAST_MATCH: Int = 2
-        const val DISPLAY_MODE_FAV: Int = 3
+        const val DISPLAY_MODE_FAV_MATCH: Int = 3
+        const val DISPLAY_MODE_FAV_TEAMS: Int = 4
 
         private const val BUNDLE_KEY_DISPLAY_MODE: String = "BUNDLE_KEY_DISPLAY_MODE"
         fun newInstance(displayMode: Int): MatchListFragment {
             val fragment = MatchListFragment()
-            val bundle = Bundle()
+            var bundle = Bundle()
             bundle.putInt(BUNDLE_KEY_DISPLAY_MODE, displayMode)
             fragment.arguments = bundle
             return fragment
@@ -63,7 +67,8 @@ class MatchListFragment : BaseFragment(), MatchListMvpView, LastMatchListAdapter
             return when (displayMode) {
                 DISPLAY_MODE_LAST_MATCH -> context.getString(R.string.last_match_simple_name)
                 DISPLAY_MODE_NEXT_MATCH -> context.getString(R.string.next_match_simple_name)
-                DISPLAY_MODE_FAV -> context.getString(R.string.favorites_simple_name)
+                DISPLAY_MODE_FAV_MATCH -> context.getString(R.string.favorites_simple_name)
+                DISPLAY_MODE_FAV_TEAMS -> context.getString(R.string.text_fav_teams_simple_name)
                 else -> MatchListFragment::class.java.simpleName
             }
         }
@@ -93,23 +98,31 @@ class MatchListFragment : BaseFragment(), MatchListMvpView, LastMatchListAdapter
 
     private fun configMatchList(displayMode: Int) {
         mLayoutManager.orientation = LinearLayoutManager.VERTICAL
-        match_list_rv_match.apply {
-            layoutManager = mLayoutManager; itemAnimator = DefaultItemAnimator()
-            adapter = when (displayMode) {
-                DISPLAY_MODE_FAV -> mFavoriteListAdapter
+        match_list_rv_match.let {
+            it.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false); it.itemAnimator = DefaultItemAnimator()
+            it.adapter = when (displayMode) {
+                DISPLAY_MODE_FAV_MATCH -> mFavoriteListAdapter
                 DISPLAY_MODE_LAST_MATCH -> mLastMatchListAdapter
                 DISPLAY_MODE_NEXT_MATCH -> mNextMatchListAdapter
+                DISPLAY_MODE_FAV_TEAMS -> mFavoriteTeamAdapter
                 else -> null
             }
         }
         mLastMatchListAdapter.setMatchListInterface(this)
         mNextMatchListAdapter.mNextMatchListCallback = this
-        presenter.onViewPrepared(displayMode, getBaseActivity()?.matchDb)
-        match_list_srl.setOnRefreshListener {
-            presenter.onViewPrepared(
-                displayMode,
-                getBaseActivity()?.matchDb
-            ); match_list_srl.isRefreshing = displayMode != DISPLAY_MODE_FAV
+        if (displayMode != DISPLAY_MODE_FAV_TEAMS) {
+            presenter.onViewPrepared(displayMode, getBaseActivity()?.matchDb)
+            match_list_srl.setOnRefreshListener {
+                presenter.onViewPrepared(
+                    displayMode,
+                    getBaseActivity()?.matchDb
+                ); match_list_srl.isRefreshing = displayMode != DISPLAY_MODE_FAV_MATCH
+            }
+        } else {
+            presenter.getFavTeamData(getBaseActivity()?.teamDb)
+            match_list_srl.setOnRefreshListener {
+                presenter.getFavTeamData(getBaseActivity()?.teamDb)
+            }; match_list_srl.isRefreshing = displayMode != DISPLAY_MODE_FAV_TEAMS
         }
     }
 
@@ -137,6 +150,12 @@ class MatchListFragment : BaseFragment(), MatchListMvpView, LastMatchListAdapter
 
     override fun putFavData(result: List<FavoriteMatchModel>) {
         mFavoriteListAdapter.addFavList(result.toMutableList())
+        match_list_srl.isRefreshing = false
+    }
+
+    override fun putFavTeamData(result: List<FavoriteTeamModel>) {
+        mFavoriteTeamAdapter.addAllTeam(result)
+        match_list_srl.isRefreshing = false
     }
 
     override fun showProgress() = match_list_progress_bar.visible()

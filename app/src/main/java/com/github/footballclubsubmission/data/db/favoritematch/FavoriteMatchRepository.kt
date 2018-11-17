@@ -8,7 +8,7 @@ import org.jetbrains.anko.db.*
  *  Created by Kei Lazu (Kennix Lazuardi) on 10/25/2018
  *  check https://github.com/KeiLazu for more
  */
-class FavoriteMatchRepository(context: Context) : ManagedSQLiteOpenHelper(context, "FavoriteTeam.db", null, 2) {
+class FavoriteMatchRepository(context: Context) : ManagedSQLiteOpenHelper(context, "FavoriteMatch.db", null, 2) {
 
     companion object {
         private var instance: FavoriteMatchRepository? = null

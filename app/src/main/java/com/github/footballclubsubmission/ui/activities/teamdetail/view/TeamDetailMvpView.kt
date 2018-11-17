@@ -9,4 +9,7 @@ import com.github.footballclubsubmission.ui.base.view.MvpView
  */
 interface TeamDetailMvpView : MvpView {
     fun displayTeamData(teamResponse: TeamResponse)
+    fun showMessageAddDb()
+    fun showMessageRemoveDb()
+    fun showMessageError()
 }

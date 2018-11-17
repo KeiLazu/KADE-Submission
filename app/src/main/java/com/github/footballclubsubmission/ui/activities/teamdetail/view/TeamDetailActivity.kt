@@ -2,13 +2,17 @@ package com.github.footballclubsubmission.ui.activities.teamdetail.view
 
 import android.content.Context
 import android.content.Intent
+import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.Menu
 import android.view.MenuItem
 import com.bumptech.glide.Glide
 import com.github.footballclubsubmission.R
+import com.github.footballclubsubmission.data.db.favoritematch.FavoriteTeamModel
+import com.github.footballclubsubmission.data.db.favoritematch.teamDb
 import com.github.footballclubsubmission.data.models.TeamResponse
 import com.github.footballclubsubmission.ui.activities.teamdetail.interactor.TeamDetailMvpInteractor
 import com.github.footballclubsubmission.ui.activities.teamdetail.presenter.TeamDetailMvpPresenter
@@ -19,6 +23,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_team_detail.*
 import kotlinx.android.synthetic.main.include_collapsable_team_detail.*
+import org.jetbrains.anko.db.delete
 import javax.inject.Inject
 
 class TeamDetailActivity : BaseActivity(), TeamDetailMvpView, HasSupportFragmentInjector,
@@ -35,6 +40,9 @@ class TeamDetailActivity : BaseActivity(), TeamDetailMvpView, HasSupportFragment
     @Inject
     internal lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
     private lateinit var teamDetailPagerAdapter: TeamDetailPagerAdapter
+
+    private var isFavorite: Boolean = false
+    private lateinit var mTeamResponse: TeamResponse
 
     private var mMenuItem: Menu? = null
 
@@ -60,6 +68,7 @@ class TeamDetailActivity : BaseActivity(), TeamDetailMvpView, HasSupportFragment
         include_content_team_detail_view_pager.let { it.currentItem = tab?.position ?: 0 }
 
     private fun initPagerAdapter(teamResponse: TeamResponse) {
+        mTeamResponse = teamResponse
         team_detail_nsv.isFillViewport = true
         teamDetailPagerAdapter = TeamDetailPagerAdapter(supportFragmentManager, teamResponse.teams.first())
         teamDetailPagerAdapter.notifyDataSetChanged()
@@ -116,9 +125,26 @@ class TeamDetailActivity : BaseActivity(), TeamDetailMvpView, HasSupportFragment
     }
 
     private fun favLogicSwitcher() {
-//        if (isFavorite) removeFromFavorite()
-//        else presenter.addToFav(matchDb, mEventItem, mHomeBadge, mAwayBadge)
+        if (isFavorite) removeFromFavorite()
+        else presenter.addToFav(teamDb, mTeamResponse.teams.first())
     }
+
+    private fun removeFromFavorite() {
+        try {
+            teamDb.use {
+                delete(
+                    FavoriteTeamModel.TABLE_FAV_TEAM,
+                    "(${FavoriteTeamModel.TEAM_ID} = ${mTeamResponse.teams.first().idTeam})",
+                    FavoriteTeamModel.TEAM_ID to (mTeamResponse.teams.first().idTeam ?: 0)
+                )
+            }
+            showMessageRemoveDb()
+        } catch (e: SQLiteConstraintException) {
+            showMessageError()
+        }
+    }
+
+    override fun showMessageError() = showMessage(getString(R.string.text_generic_error))
 
     override fun displayTeamData(teamResponse: TeamResponse) {
         teamResponse.let {
@@ -126,6 +152,23 @@ class TeamDetailActivity : BaseActivity(), TeamDetailMvpView, HasSupportFragment
             initPagerAdapter(it)
             initToolbar(it)
         }
+    }
+
+    override fun showMessageAddDb() {
+        showMessage(getString(R.string.text_success_add_to_fav))
+        isFavorite = true
+        favIconSwitcher()
+    }
+
+    override fun showMessageRemoveDb() {
+        showMessage(getString(R.string.text_success_remove_from_fav))
+        isFavorite = false
+        favIconSwitcher()
+    }
+
+    private fun favIconSwitcher() {
+        if (isFavorite) mMenuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_star_white_24dp)
+        else mMenuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_star_border_white_24dp)
     }
 
 }

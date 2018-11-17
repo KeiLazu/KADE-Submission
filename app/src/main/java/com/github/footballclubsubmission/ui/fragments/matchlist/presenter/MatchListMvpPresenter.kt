@@ -1,6 +1,7 @@
 package com.github.footballclubsubmission.ui.fragments.matchlist.presenter
 
 import com.github.footballclubsubmission.data.db.favoritematch.FavoriteMatchRepository
+import com.github.footballclubsubmission.data.db.favoritematch.FavoriteTeamRepository
 import com.github.footballclubsubmission.ui.base.presenter.MvpPresenter
 import com.github.footballclubsubmission.ui.fragments.matchlist.interactor.MatchListMvpInteractor
 import com.github.footballclubsubmission.ui.fragments.matchlist.view.MatchListMvpView
@@ -15,4 +16,6 @@ interface MatchListMvpPresenter<V : MatchListMvpView, I : MatchListMvpInteractor
         displayMode: Int,
         matchDb: FavoriteMatchRepository?
     )
+
+    fun getFavTeamData(teamDb: FavoriteTeamRepository?)
 }

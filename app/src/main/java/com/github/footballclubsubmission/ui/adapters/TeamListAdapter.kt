@@ -11,12 +11,13 @@ import com.github.footballclubsubmission.data.models.TeamResponse
 import com.github.footballclubsubmission.data.models.TeamsItem
 import com.github.footballclubsubmission.ui.activities.teamdetail.view.TeamDetailActivity
 import kotlinx.android.synthetic.main.list_item_team.view.*
+import javax.inject.Inject
 
 /**
  *  Created by Kei Lazu (Kennix Lazuardi) on 11/10/2018
  *  check https://github.com/KeiLazu for more
  */
-class TeamListAdapter(private val response: TeamResponse) : RecyclerView.Adapter<TeamListAdapter.ViewHolder>() {
+class TeamListAdapter @Inject internal constructor (private val response: TeamResponse) : RecyclerView.Adapter<TeamListAdapter.ViewHolder>() {
 
     fun addAllTeam(teamResponse: TeamResponse) {
         response.teams.clear()

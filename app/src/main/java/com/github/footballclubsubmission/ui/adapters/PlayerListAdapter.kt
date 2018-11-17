@@ -48,7 +48,8 @@ class PlayerListAdapter(private val response: PlayerListResponse) :
                 itemView.context.startActivity(
                     PlayerDetailActivity.newInstance(
                         itemView.context, playerItem.strFanart1,
-                        playerItem.strPlayer, playerItem.strHeight, playerItem.strWeight, playerItem.strDescriptionEN
+                        playerItem.strPlayer, playerItem.strHeight, playerItem.strWeight, playerItem.strDescriptionEN,
+                        playerItem.strPosition
                     )
                 )
             }

@@ -7,10 +7,12 @@ import android.support.v4.app.Fragment
 import android.view.View
 import com.github.footballclubsubmission.R
 import com.github.footballclubsubmission.R.id.*
+import com.github.footballclubsubmission.ui.adapters.FavoritePagerAdapter
 import com.github.footballclubsubmission.ui.adapters.MatchListPagerAdapter
 import com.github.footballclubsubmission.ui.base.view.BaseActivity
 import com.github.footballclubsubmission.ui.fragments.matchlist.view.MatchListFragment
 import com.github.footballclubsubmission.ui.fragments.teams.view.TeamsFragment
+import com.github.footballclubsubmission.utils.gone
 import com.github.footballclubsubmission.utils.invisible
 import com.github.footballclubsubmission.utils.visible
 import dagger.android.AndroidInjector
@@ -25,12 +27,13 @@ class MainActivity : BaseActivity(), HasSupportFragmentInjector, TabLayout.OnTab
     internal lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
     @Inject
     internal lateinit var mMatchListPagerAdapter: MatchListPagerAdapter
+    @Inject
+    internal lateinit var mFavoritePagerAdapter: FavoritePagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initWidgets(savedInstanceState)
-        setUpMatchesListPagerView()
     }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> = fragmentDispatchingAndroidInjector
@@ -38,10 +41,22 @@ class MainActivity : BaseActivity(), HasSupportFragmentInjector, TabLayout.OnTab
     override fun onFragmentDetached(tag: String) {}
 
     private fun setUpMatchesListPagerView() {
-        mMatchListPagerAdapter.count = 2
+        main_vp_matches.removeAllViews()
         main_vp_matches.adapter = mMatchListPagerAdapter
+        main_tab_layout.removeAllTabs()
         main_tab_layout.addTab(main_tab_layout.newTab().setText(getString(R.string.last_match_simple_name)))
         main_tab_layout.addTab(main_tab_layout.newTab().setText(getString(R.string.next_match_simple_name)))
+        main_vp_matches.offscreenPageLimit = main_tab_layout.tabCount
+        main_vp_matches.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(main_tab_layout))
+        main_tab_layout.addOnTabSelectedListener(this)
+    }
+
+    private fun setUpFavoriteListPagerView() {
+        main_vp_matches.removeAllViews()
+        main_vp_matches.adapter = mFavoritePagerAdapter
+        main_tab_layout.removeAllTabs()
+        main_tab_layout.addTab(main_tab_layout.newTab().setText(getString(R.string.favorites_simple_name)))
+        main_tab_layout.addTab(main_tab_layout.newTab().setText(getString(R.string.text_fav_teams_simple_name)))
         main_vp_matches.offscreenPageLimit = main_tab_layout.tabCount
         main_vp_matches.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(main_tab_layout))
         main_tab_layout.addOnTabSelectedListener(this)
@@ -58,7 +73,7 @@ class MainActivity : BaseActivity(), HasSupportFragmentInjector, TabLayout.OnTab
             when (it.itemId) {
                 matches -> setPrevMatchFragment()
                 teams -> setTeamsFragment(savedInstanceState)
-                favorites -> setFavoriteFragment(savedInstanceState)
+                favorites -> setFavoriteFragment()
             }
             true
         }
@@ -69,6 +84,7 @@ class MainActivity : BaseActivity(), HasSupportFragmentInjector, TabLayout.OnTab
         supportFragmentManager.beginTransaction().replace(layoutId, fragment, simpleNameTag).commit()
 
     private fun setPrevMatchFragment() {
+        setUpMatchesListPagerView()
         if (supportFragmentManager.findFragmentById(R.id.main_fragment_container) is MatchListFragment) {
             supportFragmentManager.beginTransaction().remove(
                 supportFragmentManager.findFragmentById(R.id.main_fragment_container)
@@ -89,14 +105,13 @@ class MainActivity : BaseActivity(), HasSupportFragmentInjector, TabLayout.OnTab
         }
     }
 
-    private fun setFavoriteFragment(savedInstanceState: Bundle?) {
-        checkVisibilityFragmentContainer(false)
-        if (savedInstanceState == null) {
-            settingFragment(
-                R.id.main_fragment_container,
-                MatchListFragment.newInstance(MatchListFragment.DISPLAY_MODE_FAV),
-                MatchListFragment.getSimpleName(this, MatchListFragment.DISPLAY_MODE_FAV)
-            )
+    private fun setFavoriteFragment() {
+        setUpFavoriteListPagerView()
+        checkVisibilityFragmentContainer(true)
+        if (supportFragmentManager.findFragmentById(R.id.main_fragment_container) is MatchListFragment) {
+            supportFragmentManager.beginTransaction().remove(
+                supportFragmentManager.findFragmentById(R.id.main_fragment_container)
+            ).commit()
         }
     }
 

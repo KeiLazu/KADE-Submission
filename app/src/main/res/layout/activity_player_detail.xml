@@ -72,13 +72,24 @@
 			app:layout_constraintTop_toBottomOf="@id/player_detail_tv_weight" />
 
 		<TextView
+			android:id="@+id/player_detail_tv_position_output"
+			android:layout_width="@dimen/zero"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:textSize="@dimen/text_size_medium"
+			android:textStyle="bold"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/player_detail_tv_height_output" />
+
+		<TextView
 			android:id="@+id/player_detail_tv_player_description_output"
 			android:layout_width="@dimen/zero"
 			android:layout_height="wrap_content"
 			android:gravity="center"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/player_detail_tv_height_output" />
+			app:layout_constraintTop_toBottomOf="@id/player_detail_tv_position_output" />
 
 	</android.support.constraint.ConstraintLayout>
 

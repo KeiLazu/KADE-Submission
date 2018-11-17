@@ -2,9 +2,8 @@ package com.github.footballclubsubmission.ui.fragments.matchlist
 
 import android.support.v7.widget.LinearLayoutManager
 import com.github.footballclubsubmission.data.models.EventLeagueResponse
-import com.github.footballclubsubmission.ui.adapters.FavoriteListAdapter
-import com.github.footballclubsubmission.ui.adapters.LastMatchListAdapter
-import com.github.footballclubsubmission.ui.adapters.NextMatchListAdapter
+import com.github.footballclubsubmission.data.models.TeamResponse
+import com.github.footballclubsubmission.ui.adapters.*
 import com.github.footballclubsubmission.ui.fragments.matchlist.interactor.MatchListInteractor
 import com.github.footballclubsubmission.ui.fragments.matchlist.interactor.MatchListMvpInteractor
 import com.github.footballclubsubmission.ui.fragments.matchlist.presenter.MatchListMvpPresenter
@@ -36,6 +35,9 @@ class MatchListFragmentModule {
 
     @Provides
     internal fun provideFavoriteListAdapter(): FavoriteListAdapter = FavoriteListAdapter(ArrayList())
+
+    @Provides
+    internal fun provideFavoriteTeamAdapter(): FavoriteTeamAdapter = FavoriteTeamAdapter(ArrayList())
 
     @Provides
     internal fun provideLinearLayoutManager(fragment: MatchListFragment): LinearLayoutManager =

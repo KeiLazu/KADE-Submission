@@ -1,6 +1,7 @@
 package com.github.footballclubsubmission.ui.activities.main
 
 import com.github.footballclubsubmission.ui.activities.main.view.MainActivity
+import com.github.footballclubsubmission.ui.adapters.FavoritePagerAdapter
 import com.github.footballclubsubmission.ui.adapters.MatchListPagerAdapter
 import dagger.Module
 import dagger.Provides
@@ -14,5 +15,8 @@ class MainModule {
 
     @Provides
     internal fun provideMatchListPagerAdapter(activity: MainActivity): MatchListPagerAdapter = MatchListPagerAdapter(activity.supportFragmentManager)
+
+    @Provides
+    internal fun provideFavoritePagerAdapter(activity: MainActivity): FavoritePagerAdapter = FavoritePagerAdapter(activity.supportFragmentManager)
 
 }

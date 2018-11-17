@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class TeamsItem(
 
     @field:SerializedName("idTeam")
-    var idTeam: String? = null,
+    var idTeam: Long? = 0,
 
     @field:SerializedName("strTeamBadge")
     var strTeamBadge: String? = null,

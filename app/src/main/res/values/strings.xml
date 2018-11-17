@@ -37,7 +37,7 @@
 	<string name="text_zero">0</string>
 	<string name="text_generic_error">Something is wrong</string>
 	<string name="text_success_add_to_fav">Added to favorites</string>
-	<string name="favorites_simple_name">Favorites</string>
+	<string name="favorites_simple_name">Matches</string>
 	<string name="text_success_remove_from_fav">Removed from favorites</string>
 	<string name="text_matches_bnm">Matches</string>
 	<string name="text_teams_bnm">Teams</string>
@@ -63,4 +63,5 @@
 	<string name="img_player_detail">image player detail fanart</string>
 	<string name="text_player_height">Height</string>
 	<string name="text_player_weight">Weight</string>
+	<string name="text_fav_teams_simple_name">Teams</string>
 </resources>

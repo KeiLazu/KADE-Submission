@@ -16,15 +16,16 @@ class PlayerDetailActivity : AppCompatActivity() {
         const val EXTRA_KEY_PLAYER_HEIGHT = "EXTRA_KEY_PLAYER_HEIGHT"
         const val EXTRA_KEY_PLAYER_WEIGHT = "EXTRA_KEY_PLAYER_WEIGHT"
         const val EXTRA_KEY_PLAYER_DESCRIPTION = "EXTRA_KEY_PLAYER_DESCRIPTION"
+        const val EXTRA_KEY_PLAYER_POSITION = "EXTRA_KEY_PLAYER_POSITION"
 
         fun newInstance(
             ctx: Context, imgFanart: String?, playerName: String?,
-            playerHeight: String?, playerWeight: String?, playerDescription: String?
+            playerHeight: String?, playerWeight: String?, playerDescription: String?, playerPosition: String?
         ): Intent {
             val intent = Intent(ctx, PlayerDetailActivity::class.java)
             intent.putExtra(EXTRA_KEY_IMG_FANART, imgFanart).putExtra(EXTRA_KEY_PLAYER_NAME, playerName)
                 .putExtra(EXTRA_KEY_PLAYER_HEIGHT, playerHeight).putExtra(EXTRA_KEY_PLAYER_WEIGHT, playerWeight)
-                .putExtra(EXTRA_KEY_PLAYER_DESCRIPTION, playerDescription)
+                .putExtra(EXTRA_KEY_PLAYER_DESCRIPTION, playerDescription).putExtra(EXTRA_KEY_PLAYER_POSITION, playerPosition)
             return intent
         }
 
@@ -43,6 +44,7 @@ class PlayerDetailActivity : AppCompatActivity() {
         player_detail_tv_weight_output.text = intent.extras.getString(EXTRA_KEY_PLAYER_WEIGHT, "")
         player_detail_tv_name_output.text = intent.extras.getString(EXTRA_KEY_PLAYER_NAME, "")
         player_detail_tv_player_description_output.text = intent.extras.getString(EXTRA_KEY_PLAYER_DESCRIPTION, "")
+        player_detail_tv_position_output.text = intent.extras.getString(EXTRA_KEY_PLAYER_POSITION, "")
 
     }
 

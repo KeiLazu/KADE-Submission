@@ -3,7 +3,8 @@ package com.github.footballclubsubmission.ui.fragments.matchlist.presenter
 import android.util.Log
 import com.github.footballclubsubmission.data.db.favoritematch.FavoriteMatchModel
 import com.github.footballclubsubmission.data.db.favoritematch.FavoriteMatchRepository
-import com.github.footballclubsubmission.ui.activities.matchdetail.presenter.MatchDetailPresenter
+import com.github.footballclubsubmission.data.db.favoritematch.FavoriteTeamModel
+import com.github.footballclubsubmission.data.db.favoritematch.FavoriteTeamRepository
 import com.github.footballclubsubmission.ui.base.presenter.BasePresenter
 import com.github.footballclubsubmission.ui.fragments.matchlist.interactor.MatchListMvpInteractor
 import com.github.footballclubsubmission.ui.fragments.matchlist.view.MatchListFragment
@@ -33,7 +34,7 @@ class MatchListPresenter<V : MatchListMvpView, I : MatchListMvpInteractor>
         when (displayMode) {
             MatchListFragment.DISPLAY_MODE_LAST_MATCH -> getLastMatchApi()
             MatchListFragment.DISPLAY_MODE_NEXT_MATCH -> getNextMatchApi()
-            MatchListFragment.DISPLAY_MODE_FAV -> getFavData(matchDb)
+            MatchListFragment.DISPLAY_MODE_FAV_MATCH -> getFavData(matchDb)
         }
     }
 
@@ -73,6 +74,16 @@ class MatchListPresenter<V : MatchListMvpView, I : MatchListMvpInteractor>
             getView()?.let {
                 it.hideProgress()
                 it.putFavData(result)
+            }
+        }
+    }
+
+    override fun getFavTeamData(teamDb: FavoriteTeamRepository?) {
+        teamDb?.use {
+            val result : List<FavoriteTeamModel> = select(FavoriteTeamModel.TABLE_FAV_TEAM).parseList(classParser())
+            getView()?.let {
+                it.hideProgress()
+                it.putFavTeamData(result)
             }
         }
     }
